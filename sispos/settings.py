@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from dj_database_url import parser as dburl
+from dj_database_url import parse as dburl
 from authlib.integrations.django_client import OAuth
 from decouple import config, Csv
 
