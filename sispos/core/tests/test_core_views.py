@@ -13,3 +13,7 @@ class CoreViewsTest(TestCase):
     def test_template(self):
         """It should render index.html template"""
         self.assertTemplateUsed(self.resp, 'index.html')
+
+    def test_base_template(self):
+        """It should render base.html template"""
+        self.assertTemplateUsed(self.resp, 'base.html')
