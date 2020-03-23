@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from authlib.integrations.django_client import OAuth
+from decouple import config, Csv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +22,40 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'fp!)l!p%=x+&optrkmc$h^$&^w4*us*)6-acf8p_cx#p-nhr5e'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
+
+AUTH_USER_MODEL = 'accounts.User'
+
+ALLOWED_UNIDADES = config('ALLOWED_UNIDADES', default=[], cast=Csv())
+
+
+# OAuth Configuration
+
+oauth = OAuth()
+
+REDIRECT_URI = 'http://localhost:8000/auth/authorize'
+
+AUTHLIB_OAUTH_CLIENTS = {
+    'usp': {
+        'client_id': config('OAUTH_CLIENT_ID'),
+        'client_secret': config('OAUTH_CLIENT_SECRET')
+    }
+}
+
+oauth.register(
+    name='usp',
+    request_token_url=config('REQUEST_TOKEN_URL'),
+    access_token_url=config('ACCESS_TOKEN_URL'),
+    authorize_url=config('AUTHORIZE_URL'),
+    api_base_url=config('API_BASE_URL')
+)
+
+USP_CLIENT = oauth
 
 
 # Application definition
@@ -38,6 +68,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'bootstrap4',
+    'sispos.core',
+    'sispos.accounts',
     'viewflow',
     'test_without_migrations',
     'sispos.relatorios',
