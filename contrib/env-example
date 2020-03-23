@@ -1,0 +1,20 @@
+#####################
+#Aplication settings
+#####################
+SECRET_KEY=your_secret_key_here
+DEBUG=True
+ALLOWED_HOSTS=127.0.0.1
+
+
+###############
+#OAuth Settings
+###############
+ALLOWED_UNIDADES=14
+OAUTH_CLIENT_ID=OAuth_client_id
+OAUTH_CLIENT_SECRET=OAuth_Client_Secret
+
+
+REQUEST_TOKEN_URL=https://yourrequesttoquen.com/request/token
+ACCESS_TOKEN_URL=https://ypuraccesstoken.com/access_token
+AUTHORIZE_URL=https://yourauthorizetoken.com/authorize
+API_BASE_URL=https://yourapibaseurl.com/api
