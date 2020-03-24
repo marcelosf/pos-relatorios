@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'widget_tweaks',
     'bootstrap4',
     'sispos.core',
     'sispos.accounts',
