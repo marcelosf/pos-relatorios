@@ -1,3 +1,4 @@
+{% load static %}
 {% load bootstrap4 %}
 
 <!DOCTYPE html>
@@ -11,15 +12,17 @@
         <meta name="author" content="">
 
         <title>SISPOS</title>
-
         <!-- Bootstrap core CSS -->
         {% bootstrap_css %}
 
+        <!-- Layout css -->
+        <link href="{% static 'css/layout.css' %}" rel="stylesheet">
+        
     </head>
 
     <body>
         {% include 'menu.html' %}
-        
+
         {% block content %}
         {% endblock content %}
 
