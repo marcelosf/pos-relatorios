@@ -13,3 +13,7 @@ class RelatoriosViewsTest(TestCase):
     def test_template(self):
         """It should render relatorios_novo.html"""
         self.assertTemplateUsed(self.resp, 'relatorios_novo.html')
+
+    def test_base_template(self):
+        """It should render base.html"""
+        self.assertTemplateUsed(self.resp, 'base.html')
