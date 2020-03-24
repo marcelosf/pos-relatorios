@@ -1,5 +1,5 @@
 from django.urls import path
-from sispos.relatorios.views import relatorios_novo 
+from sispos.relatorios.views import relatorios_novo
 
 app_name = 'relatorios'
 

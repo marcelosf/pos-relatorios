@@ -20,5 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('sispos.accounts.urls')),
     path('', include('sispos.core.urls')),
-    path('relatorios', include('sispos.relatorios.urls')),
+    path('relatorios/', include('sispos.relatorios.urls')),
 ]
