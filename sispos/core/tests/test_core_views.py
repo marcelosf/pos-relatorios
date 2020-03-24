@@ -39,7 +39,7 @@ class CoreViewsTest(TestCase):
 
     def test_template_html(self):
         """Template should render html items"""
-        html = ['<button', 'Enviar Relatório']
+        html = ['<a', 'Enviar Relatório']
 
         for expected in html:
             with self.subTest():
@@ -54,3 +54,7 @@ class CoreViewsTest(TestCase):
         for expected in card_content:
             with self.subTest():
                 self.assertContains(self.resp, expected)
+
+    def test_enviar_relatorio_form_link(self):
+        """Template should render relatorio form link"""
+        self.assertContains(self.resp, r('relatorios:relatorios_new'))
