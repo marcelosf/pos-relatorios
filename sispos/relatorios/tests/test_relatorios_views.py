@@ -26,3 +26,8 @@ class RelatoriosViewsTest(TestCase):
         for count, expected in html_form_itens:
             with self.subTest():
                 self.assertContains(self.resp, expected, count)
+
+    def test_context_has_form(self):
+        """Context shoud have form"""
+        context = self.resp.context
+        self.assertIn('form', context)
