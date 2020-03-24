@@ -19,4 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('sispos.accounts.urls')),
+    path('', include('sispos.core.urls')),
 ]
