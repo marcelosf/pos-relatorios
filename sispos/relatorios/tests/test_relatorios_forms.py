@@ -18,3 +18,8 @@ class RelatoriosFormTest(TestCase):
         for expected in fields:
             with self.subTest():
                 self.assertIn(expected, list(self.form.fields))
+
+    def test_relator_choices(self):
+        """Relator Choices should be > 1"""
+        relator = self.form.fields['relator']
+        self.assertTrue(len(relator.choices) > 0)
