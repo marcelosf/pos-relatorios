@@ -1,6 +1,30 @@
-{% load static %}
-
-{# Load the tag library #}
 {% load bootstrap4 %}
 
-{% block content %}{% endblock content%}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>SISPOS</title>
+
+        <!-- Bootstrap core CSS -->
+        {% bootstrap_css %}
+
+    </head>
+
+    <body>
+
+        {% block content %}
+        {% endblock content %}
+
+        <!-- Bootstrap core JavaScript -->
+        {% bootstrap_javascript jquery='full' %}
+
+    </body>
+
+</html>
