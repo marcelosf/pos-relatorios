@@ -28,3 +28,19 @@ class CoreViewsTest(TestCase):
         for expected in scripts:
             with self.subTest():
                 self.assertContains(self.resp, expected)
+
+    def test_menu_html(self):
+        """Tamplte shoud render the menu html"""
+        html = ['<nav', '>SISPOS</a>']
+
+        for expected in html:
+            with self.subTest():
+                self.assertContains(self.resp, expected)
+
+    def test_template_html(self):
+        """Template should render html items"""
+        html = ['<button', 'Enviar Relatório']
+
+        for expected in html:
+            with self.subTest():
+                self.assertContains(self.resp, expected)
