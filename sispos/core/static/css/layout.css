@@ -3,6 +3,11 @@ body {
     background-color: #eaecec;
 }
 
+.header-top {
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
 .masthead {
     height: 100vh;
   }
