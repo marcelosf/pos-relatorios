@@ -17,3 +17,10 @@ class CoreViewsTest(TestCase):
     def test_base_template(self):
         """It should render base.html template"""
         self.assertTemplateUsed(self.resp, 'base.html')
+
+    def test_bootstrap_scripts(self):
+        scripts = ['bootstrap.min.css', 'bootstrap.min.js']
+
+        for expected in scripts:
+            with self.subTest():
+                self.assertContains(self.resp, expected)
