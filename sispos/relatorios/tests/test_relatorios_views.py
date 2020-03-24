@@ -9,3 +9,7 @@ class RelatoriosViewsTest(TestCase):
     def test_status_code(self):
         """Status code should be 200"""
         self.assertEqual(200, self.resp.status_code)
+
+    def test_template(self):
+        """It should render relatorios_novo.html"""
+        self.assertTemplateUsed(self.resp, 'relatorios_novo.html')
