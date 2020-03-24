@@ -44,3 +44,13 @@ class CoreViewsTest(TestCase):
         for expected in html:
             with self.subTest():
                 self.assertContains(self.resp, expected)
+
+    def test_relatorios_card(self):
+        """Template should render relatorios card"""
+        card_content = ['Submissão de relatórios de atividade',
+                        'Formulário para envio de relatórios de atividades de',
+                        'Mestrado e Doutorado']
+
+        for expected in card_content:
+            with self.subTest():
+                self.assertContains(self.resp, expected)
