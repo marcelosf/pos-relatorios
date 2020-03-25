@@ -17,3 +17,8 @@ class RelatoriosTest(TestCase):
     def test_relatorio_create(self):
         """Relatorios count should be 1"""
         self.assertEqual(1, Relatorios.objects.count())
+
+    def test_relator_not_required(self):
+        """relator field should not be required"""
+        field = Relatorios.relator.field
+        self.assertTrue(field.blank)
