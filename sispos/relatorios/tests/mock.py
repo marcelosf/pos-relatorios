@@ -1,5 +1,7 @@
 from sispos.accounts.models import User
 from sispos.relatorios.models import Relatorios
+from unittest import mock
+from django.core.files import File
 
 
 class MockUser():
@@ -18,8 +20,8 @@ class MockRelatorio():
     def make_relatorio(self, **kwargs):
         relatorio_default = {'nome': 'Jetson', 'programa': 'Mestrado',
                              'orientador': 'Orientador 1',
-                             'relatorio': 'relatorio.pdf',
-                             'encaminhamento': 'encaminhamento.pdf'}
+                             'relatorio': mock.MagicMock(spec=File),
+                             'encaminhamento': mock.MagicMock(spec=File)}
         relatorio = dict(relatorio_default, **kwargs)
         return relatorio
 
