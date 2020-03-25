@@ -89,6 +89,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'sispos.urls'
+LOGIN_URL = '/auth/login'
 
 TEMPLATES = [
     {
