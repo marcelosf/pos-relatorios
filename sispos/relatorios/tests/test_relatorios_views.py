@@ -38,6 +38,10 @@ class RelatoriosViewsGetTest(TestCase):
         context = self.resp.context
         self.assertIn('form', context)
 
+    def test_csrf_token(self):
+        """Template should render csrf token"""
+        self.assertContains(self.resp, 'csrfmiddlewaretoken')
+
 
 class RelatoriosViewsPostTest(TestCase):
     def setUp(self):
