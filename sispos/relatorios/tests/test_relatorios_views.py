@@ -42,6 +42,13 @@ class RelatoriosViewsGetTest(TestCase):
         """Template should render csrf token"""
         self.assertContains(self.resp, 'csrfmiddlewaretoken')
 
+    def test_html_form_attrs(self):
+        """form should set enctype and action attributes"""
+        attrs = ['enctype="multipart/form-data"', 'action="/relatorios/novo"']
+        for expected in attrs:
+            with self.subTest():
+                self.assertContains(self.resp, expected)
+
 
 class RelatoriosViewsPostTest(TestCase):
     def setUp(self):
