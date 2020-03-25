@@ -90,6 +90,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'sispos.urls'
 LOGIN_URL = '/auth/login'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'http://127.0.0.1/media/'
 
 TEMPLATES = [
     {
