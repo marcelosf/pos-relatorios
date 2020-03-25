@@ -71,3 +71,7 @@ class CoreViewsPageErrorTest(TestCase):
     def test_template(self):
         """It should render 404.html"""
         self.assertTemplateUsed(self.resp, '404.html')
+
+    def test_template_base(self):
+        """It should render base.html template"""
+        self.assertTemplateUsed(self.resp, 'base.html')
