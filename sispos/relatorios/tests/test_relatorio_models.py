@@ -1,14 +1,14 @@
 from django.test import TestCase
+from django.db.models.fields.files import FileField
 from sispos.relatorios.models import Relatorios
+from sispos.relatorios.tests import mock
 
 
 class RelatoriosTest(TestCase):
     def setUp(self):
-        relatorio = dict(nome='Jadelson', relator='Relatonildo',
-                         orientador='Sidney', programa='Mestrado',
-                         relatorio='relatorio.pdf',
-                         encaminhamento='enc.pdf')
-        self.obj = Relatorios.objects.create(**relatorio)
+        mock_relatorio = mock.MockRelatorio()
+        relatorio_data = mock_relatorio.make_relatorio()
+        self.obj = Relatorios.objects.create(**relatorio_data)
 
     def test_relatorio_instance(self):
         """Obj should be an instance of Relatorio"""
@@ -22,3 +22,13 @@ class RelatoriosTest(TestCase):
         """relator field should not be required"""
         field = Relatorios.relator.field
         self.assertTrue(field.blank)
+
+    def test_relatorio_is_file_field(self):
+        """relatorio should be FileField"""
+        field = Relatorios.relatorio.field
+        self.assertIsInstance(field, FileField)
+
+    def test_encaminhamento_is_file_field(self):
+        """encaminhamento should be FileField"""
+        field = Relatorios.encaminhamento.field
+        self.assertIsInstance(field, FileField)

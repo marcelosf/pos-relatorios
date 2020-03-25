@@ -6,5 +6,5 @@ class Relatorios(models.Model):
     relator = models.CharField('Relator', max_length=128, blank=True)
     orientador = models.CharField('Orientador', max_length=128)
     programa = models.CharField('Programa', max_length=20)
-    relatorio = models.CharField('Relatório', max_length=20)
-    encaminhamento = models.CharField('Encaminhamento', max_length=20)
+    relatorio = models.FileField('Relatório', upload_to='relatorios/%Y/%m/%d/')
+    encaminhamento = models.FileField('Encaminhamento', upload_to='encaminhamentos/%Y/%m/%d/')
