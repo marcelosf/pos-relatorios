@@ -1,11 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'base_error.html' %}
 
-{% block content %}
+{% block card_header %}
+    <h1 class="display-4">Página não encontrada</h1>
+{% endblock card_header %}
 
-    <div class="header-top">
-        <div class="container">
-            A página requisitada não existe.
-        </div>
-    </div>
-
-{% endblock content %}
+{% block card_body %}
+    <p class="lead">A página requisitada não existe.</p>
+    <a href="{% url 'core:index' %}" class="btn btn-lg btn-outline-primary">
+        Retornar para a página principal
+    </a>
+{% endblock card_body %}
