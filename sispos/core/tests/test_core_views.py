@@ -58,3 +58,20 @@ class CoreViewsTest(TestCase):
     def test_enviar_relatorio_form_link(self):
         """Template should render relatorio form link"""
         self.assertContains(self.resp, r('relatorios:relatorios_new'))
+
+
+class CoreViewsPageErrorTest(TestCase):
+    def setUp(self):
+        self.resp = self.client.get('/not-exists/')
+
+    def test_response_status_code(self):
+        """Status code should be 404"""
+        self.assertEqual(404, self.resp.status_code)
+
+    def test_template(self):
+        """It should render 404.html"""
+        self.assertTemplateUsed(self.resp, '404.html')
+
+    def test_template_base(self):
+        """It should render base.html template"""
+        self.assertTemplateUsed(self.resp, 'base.html')
