@@ -23,3 +23,7 @@ class RelatoriosFormTest(TestCase):
         """Relator Choices should be > 1"""
         relator = self.form.fields['relator']
         self.assertTrue(len(relator.choices) > 0)
+
+    def test_relator_not_required(self):
+        """relator field should not be required"""
+        self.assertFalse(self.form.fields['relator'].required)

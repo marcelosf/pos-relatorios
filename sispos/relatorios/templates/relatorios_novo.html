@@ -6,7 +6,13 @@
 {% block content %}
     <div class="container">
         <div class="header-top">
-            <form action="#" method="post" novalidate>
+            <form 
+                action="{% url 'relatorios:relatorios_new' %}" 
+                method="post" 
+                novalidate 
+                enctype="multipart/form-data"
+            >
+                {% csrf_token %}
                 <div class="card shadow">
                     <div class="card-header">
                         <h4>Relatório de atividades</h4>
