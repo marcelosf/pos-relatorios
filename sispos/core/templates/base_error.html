@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="header-top">
+        <div class="container">
+            <div class="card shadow">
+                <div class="card-header">
+                    {% block card_header %}
+                    {% endblock card_header %}
+                </div>
+                <div class="card-body">
+                    {% block card_body %}
+                    {% endblock card_body %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
