@@ -1,9 +1,14 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
+from sispos.relatorios.tests import mock
 
 
 class RelatoriosViewsTest(TestCase):
     def setUp(self):
+        mock_user = mock.MockUser()
+        user_data = mock_user.make_user_data()
+        user = mock_user.save_user(user_data)
+        self.client.force_login(user)
         self.resp = self.client.get(r('relatorios:relatorios_new'))
 
     def test_status_code(self):
@@ -31,3 +36,12 @@ class RelatoriosViewsTest(TestCase):
         """Context shoud have form"""
         context = self.resp.context
         self.assertIn('form', context)
+
+
+class RelatoriosViewLoggedOut(TestCase):
+    def setUp(self):
+        self.resp = self.client.get(r('relatorios:relatorios_new'))
+
+    def test_status_code(self):
+        """Status code shoud be 302"""
+        self.assertEqual(302, self.resp.status_code)
