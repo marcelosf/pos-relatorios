@@ -20,11 +20,16 @@ class MockRelatorio():
     def make_relatorio(self, **kwargs):
         relatorio_default = {'nome': 'Jetson', 'programa': 'Mestrado',
                              'orientador': 'Orientador 1',
-                             'relatorio': mock.MagicMock(spec=File),
-                             'encaminhamento': mock.MagicMock(spec=File)}
+                             'relatorio': self.make_file(),
+                             'encaminhamento': self.make_file()}
         relatorio = dict(relatorio_default, **kwargs)
         return relatorio
 
     def save_relatorio(self, data):
         relatorios = Relatorios.objects.create(**data)
         return relatorios
+
+    def make_file(self):
+        file_mock = mock.MagicMock(spec=File, name='file-mock')
+        file_mock.name = 'file.pdf'
+        return file_mock
