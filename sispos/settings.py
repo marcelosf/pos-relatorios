@@ -140,6 +140,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Email cofiguration
+EMAIL_SUBJECT = config('EMAIL_SUBJECT')
+EMAIL_FROM = config('EMAIL_FROM')
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
