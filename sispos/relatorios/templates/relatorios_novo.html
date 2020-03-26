@@ -8,8 +8,8 @@
         <div class="header-top">
             <form 
                 action="{% url 'relatorios:relatorios_new' %}" 
-                method="post" 
-                novalidate 
+                method="post"
+                novalidate
                 enctype="multipart/form-data"
             >
                 {% csrf_token %}
@@ -17,36 +17,9 @@
                     <div class="card-header">
                         <h4>Relatório de atividades</h4>
                     </div>
+                    {% bootstrap_form_errors form %}
                     <div class="card-body">
-                        <div class="form-group">
-                            {{ form.nome.label_tag }}
-                            {{ form.nome|add_class:'form-control form-control-lg' }}
-                        </div>
-
-                        <div class="form-group">
-                            {{ form.relator.label_tag }}
-                            {{ form.relator|add_class:'form-control form-control-lg' }}
-                        </div>
-                        <div class="form-group">
-                            {{ form.orientador.label_tag }}
-                            {{ form.orientador|add_class:'form-control form-control-lg' }}
-                        </div>
-        
-                        <div class="form-group">
-                            {{ form.programa.label_tag }}
-                            {{ form.programa|add_class:'form-control form-control-lg' }}
-                        </div>
-        
-                        <div class="form-group">
-                            {{ form.relatorio.label_tag }}
-                            {{ form.relatorio|add_class:'form-control' }}
-                        </div>
-        
-                        <div class="form-group">
-                            {{ form.encaminhamento.label_tag }}
-                            {{ form.encaminhamento|add_class:'form-control' }}
-                        </div>
-        
+                        {% bootstrap_form form %}
                         <button class="btn btn-primary" type="submit">Enviar</button>
                     </div>
                 </div>
