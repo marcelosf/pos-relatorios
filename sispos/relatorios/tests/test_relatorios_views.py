@@ -26,7 +26,7 @@ class RelatoriosViewsGetTest(TestCase):
 
     def test_html_form(self):
         """Template should render html form"""
-        html_form_itens = ((1, '<form'), (1, 'type="text"'), (3, '<select'),
+        html_form_itens = ((1, '<form'), (1, 'type="text"'), (2, '<select'),
                            (2, 'type="file"'), (1, 'type="submit"'))
 
         for count, expected in html_form_itens:
