@@ -69,6 +69,11 @@ class RelatoriosViewsPostValidTest(TestCase):
         """Relatorio count should be 1"""
         self.assertEqual(1, Relatorios.objects.count())
 
+    def test_relatorio_message(self):
+        """Template should render a success message"""
+        message = 'Relatório enviado com sucesso'
+        self.assertContains(self.resp, message)
+
 
 class RelatoriosViewPostInvalidTest(TestCase):
     def setUp(self):
