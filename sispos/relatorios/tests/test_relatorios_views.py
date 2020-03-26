@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
+from django.core import mail
 from sispos.relatorios.tests import mock
 from sispos.relatorios.models import Relatorios
 
@@ -73,6 +74,10 @@ class RelatoriosViewsPostValidTest(TestCase):
         """Template should render a success message"""
         message = 'Relatório enviado com sucesso'
         self.assertContains(self.resp, message)
+
+    def test_send_mail(self):
+        """It should send emails after form submission"""
+        self.assertEqual(2, len(mail.outbox))
 
 
 class RelatoriosViewPostInvalidTest(TestCase):
