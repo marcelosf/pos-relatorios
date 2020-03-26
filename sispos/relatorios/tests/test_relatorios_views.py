@@ -50,7 +50,7 @@ class RelatoriosViewsGetTest(TestCase):
                 self.assertContains(self.resp, expected)
 
 
-class RelatoriosViewsPostTest(TestCase):
+class RelatoriosViewsPostValidTest(TestCase):
     def setUp(self):
         mock_relatorio = mock.MockRelatorio()
         relatorio_data = mock_relatorio.make_relatorio()
@@ -68,6 +68,30 @@ class RelatoriosViewsPostTest(TestCase):
     def test_relatorio_created(self):
         """Relatorio count should be 1"""
         self.assertEqual(1, Relatorios.objects.count())
+
+
+class RelatoriosViewPostInvalidTest(TestCase):
+    def setUp(self):
+        mock_user = mock.MockUser()
+        user_data = mock_user.make_user_data()
+        user = mock_user.save_user(user_data)
+        self.client.force_login(user)
+        self.resp = self.client.post(r('relatorios:relatorios_new'), {})
+
+    def test_form_is_invalid(self):
+        """Form should be invalid"""
+        form = self.resp.context['form']
+        self.assertFalse(form.is_valid())
+
+    def test_error_message(self):
+        """Template should render error message"""
+        form = self.resp.context['form']
+        form.is_valid()
+        errors = form.errors.values()
+
+        for message in errors:
+            with self.subTest():
+                self.assertContains(self.resp, message[0])
 
 
 class RelatoriosViewLoggedOut(TestCase):
