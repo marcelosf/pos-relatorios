@@ -20,7 +20,7 @@ def relatorios_novo(request):
 def create_relatorio(request):
     form = RelatoriosForm(request.POST, request.FILES)
     if form.is_valid():
-        Relatorios.objects.create(**form.cleaned_data)
+        request.user.relatorios_set.create(**form.cleaned_data)
         messages.success(request, 'Relatório enviado com sucesso.')
         _send_email(
             user=request.user,

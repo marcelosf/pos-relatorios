@@ -83,6 +83,11 @@ class RelatoriosViewsPostValidTest(TestCase):
         """It should send emails after form submission"""
         self.assertEqual(2, len(mail.outbox))
 
+    def test_relatorio_assigned_to_user(self):
+        """relatorio should be assigned to user"""
+        relatorio = Relatorios.objects.filter().first()
+        self.assertTrue(relatorio.user)
+
 
 class RelatoriosViewPostInvalidTest(TestCase):
     def setUp(self):
