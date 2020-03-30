@@ -56,8 +56,7 @@ class RelatoriosViewsPostValidTest(TestCase):
         mock_relatorio = mock.MockRelatorio()
         relatorio_data = mock_relatorio.make_relatorio()
         mock_user = mock.MockUser()
-        user_data = mock_user.make_user_data()
-        user = mock_user.save_user(user_data)
+        user = mock_user.make_coordenador()
         self.client.force_login(user)
         self.resp = self.client.post(r('relatorios:relatorios_new'),
                                      relatorio_data)
