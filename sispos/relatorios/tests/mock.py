@@ -2,14 +2,22 @@ from sispos.accounts.models import User
 from sispos.relatorios.models import Relatorios
 from unittest import mock
 from django.core.files import File
+from django.contrib.auth.models import Permission
 
 
 class MockUser():
     def make_user_data(self, **kwargs):
         user_default = {'login': '123456', 'name': 'Jetson Four',
-                        'type': 'I'}
+                        'type': 'I', 'main_email': 'jetsonfour@mailinator.com'}
         user_data = dict(user_default, **kwargs)
         return user_data
+
+    def make_coordenador(self):
+        user_data = self.make_user_data(login='334455')
+        coordendor = self.save_user(user_data)
+        perms = Permission.objects.get(codename='change_relatorios')
+        coordendor.user_permissions.set([perms])
+        return coordendor
 
     def save_user(self, data):
         user = User.objects.create_user(**data)
