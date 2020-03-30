@@ -10,8 +10,8 @@ from sispos.relatorios.models import Relatorios
 
 @login_required(login_url=settings.LOGIN_URL)
 def relatorios_novo(request):
-    form = RelatoriosForm()
     if not request.method == 'POST':
+        form = RelatoriosForm(initial={'nome': request.user.get_full_name()})
         return render(request, 'relatorios_novo.html', {'form': form})
     form = create_relatorio(request)
     return render(request, 'relatorios_novo.html', {'form': form})
