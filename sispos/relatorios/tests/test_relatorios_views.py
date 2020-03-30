@@ -49,6 +49,11 @@ class RelatoriosViewsGetTest(TestCase):
             with self.subTest():
                 self.assertContains(self.resp, expected)
 
+    def test_autofill_relatorio_name(self):
+        """name field should be auto filled"""
+        form = self.resp.context['form']
+        self.assertEqual('Jetson Four', form.initial['nome'])
+
 
 class RelatoriosViewsPostTest(TestCase):
     def setUp(self):
