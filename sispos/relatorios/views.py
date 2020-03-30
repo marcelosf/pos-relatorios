@@ -22,19 +22,19 @@ def create_relatorio(request):
     if form.is_valid():
         Relatorios.objects.create(**form.cleaned_data)
         messages.success(request, 'Relatório enviado com sucesso.')
-        send_email(
-            to=[request.user.main_email],
+        _send_email(
+            user=request.user,
             template_name='email_aluno.txt',
             context={'subscription': form.cleaned_data}
-        )
-        send_email(
-            to=['coordenador1@test.com', 'coordenador2@test.com'],
-            template_name='email_comissao.txt',
-            context={'subscription': {}}
         )
     return form
 
 
-def send_email(to, template_name, context):
+def _send_email(user, template_name, context):
+    body = render_to_string(template_name, context)
+    user.email_user(settings.EMAIL_SUBJECT, body, settings.EMAIL_FROM)
+
+
+def send_email_coodenador(to, template_name, context):
     body = render_to_string(template_name, context)
     mail.send_mail(settings.EMAIL_SUBJECT, body, settings.EMAIL_FROM, to)
