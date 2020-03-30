@@ -1,0 +1,5 @@
+Olá {{ subscription.nome }}.
+
+O seu relatório foi recebido e será avaliado.
+
+Comissão de Pós Graduação.
