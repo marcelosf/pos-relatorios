@@ -32,3 +32,7 @@ class RelatoriosTest(TestCase):
         """encaminhamento should be FileField"""
         field = Relatorios.encaminhamento.field
         self.assertIsInstance(field, FileField)
+
+    def test_has_user(self):
+        """It should have user_id property"""
+        self.assertTrue(hasattr(self.obj, 'user'))
