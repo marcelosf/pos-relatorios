@@ -58,11 +58,12 @@ class RelatoriosViewsGetTest(TestCase):
 
 class RelatoriosViewsPostValidTest(TestCase):
     def setUp(self):
-        mock_relatorio = mock.MockRelatorio()
-        relatorio_data = mock_relatorio.make_relatorio()
         mock_user = mock.MockUser()
-        user = mock_user.make_coordenador()
-        self.client.force_login(user)
+        orientador = mock_user.make_orientador()
+        mock_relatorio = mock.MockRelatorio()
+        relatorio_data = mock_relatorio.make_relatorio(orientador=orientador.pk)
+        coordenador = mock_user.make_coordenador()
+        self.client.force_login(coordenador)
         self.resp = self.client.post(r('relatorios:relatorios_new'),
                                      relatorio_data)
 
