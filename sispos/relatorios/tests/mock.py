@@ -2,7 +2,7 @@ from sispos.accounts.models import User
 from sispos.relatorios.models import Relatorios
 from unittest import mock
 from django.core.files import File
-from django.contrib.auth.models import Permission
+from django.contrib.auth.models import Permission, Group
 
 
 class MockUser():
@@ -12,21 +12,34 @@ class MockUser():
         user_data = dict(user_default, **kwargs)
         return user_data
 
-    def make_coordenador(self):
-        user_data = self.make_user_data(login='334455')
-        coordendor = self.save_user(user_data)
-        perms = Permission.objects.get(codename='change_relatorios')
-        coordendor.user_permissions.set([perms])
-        return coordendor
-
     def save_user(self, data):
         user = User.objects.create_user(**data)
         return user
 
+    def make_coordenador(self):
+        user_data = self.make_user_data(login='334455')
+        coordendor = self.save_user(user_data)
+        self.set_permission('change_relatorios', coordendor)
+        return coordendor
+
+    def make_orientador(self):
+        user_data = self.make_user_data(name='Orientador 1')
+        orientador = self.save_user(user_data)
+        self.set_group(group_name='orientadores', user=orientador)
+        return orientador
+
+    def set_permission(self, perm_codename, user):
+        perms = Permission.objects.get(codename=perm_codename)
+        user.user_permissions.set([perms])
+
+    def set_group(self, group_name, user):
+        group, created = Group.objects.get_or_create(**{'name': group_name})
+        user.groups.set([group])
+
 
 class MockRelatorio():
     def make_relatorio(self, **kwargs):
-        relatorio_default = {'nome': 'Jetson', 'programa': 'Mestrado',
+        relatorio_default = {'nome': 'Jetson Four', 'programa': 'Mestrado',
                              'orientador': 'Orientador 1',
                              'relatorio': self.make_file(),
                              'encaminhamento': self.make_file()}
