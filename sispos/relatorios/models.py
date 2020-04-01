@@ -10,3 +10,4 @@ class Relatorios(models.Model):
     relatorio = models.FileField('Relatório', upload_to='relatorios/%Y/%m/%d/')
     encaminhamento = models.FileField('Encaminhamento', upload_to='encaminhamentos/%Y/%m/%d/')
     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)
+    created = models.DateField('envio', auto_now_add=True)
