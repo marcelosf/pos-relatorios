@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'django_tables2',
+    'django_filters',
     'widget_tweaks',
     'bootstrap4',
     'sispos.core',
