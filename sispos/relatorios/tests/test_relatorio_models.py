@@ -40,3 +40,7 @@ class RelatoriosTest(TestCase):
     def test_relatorios_has_created_field(self):
         """Relatorio should have a created field"""
         self.assertTrue(hasattr(self.obj, 'created'))
+
+    def test_relatorios_has_uuid_field(self):
+        """Relatorio should have a created field"""
+        self.assertTrue(hasattr(self.obj, 'uuid'))
