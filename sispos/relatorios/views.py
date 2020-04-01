@@ -3,7 +3,19 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.template.loader import render_to_string
+from django_tables2 import SingleTableView
 from sispos.relatorios.forms import RelatoriosForm
+from sispos.relatorios.tables import RelatoriosTable
+from sispos.relatorios.models import Relatorios
+
+
+class RelatoriosList(SingleTableView):
+    model = Relatorios
+    table_class = RelatoriosTable
+    template_name = 'relatorios_list.html'
+
+
+relatorios_list = RelatoriosList.as_view()
 
 
 @login_required(login_url=settings.LOGIN_URL)
