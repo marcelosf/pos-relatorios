@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
 from django.db.models.query import QuerySet
+from django_filters import FilterSet
 from sispos.relatorios.tests import mock
 
 
@@ -57,3 +58,8 @@ class ViewsRelatoriosListTest(TestCase):
         """Template should render detalhar button"""
         expected = '<a class="btn btn-sm btn-outline-primary"'
         self.assertContains(self.resp, expected)
+
+    def test_has_filter(self):
+        """Template should render filters"""
+        filter = self.resp.context['filter']
+        self.assertIsInstance(filter, FilterSet)
