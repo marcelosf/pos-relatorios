@@ -1,10 +1,14 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
 from django.db.models.query import QuerySet
+from sispos.relatorios.tests import mock 
 
 
 class ViewsRelatoriosListTest(TestCase):
     def setUp(self):
+        mock_relatorio = mock.MockRelatorio()
+        relatorio = mock_relatorio.make_relatorio()
+        mock_relatorio.save_relatorio(relatorio)
         self.resp = self.client.get(r('relatorios:relatorios_list'))
 
     def test_status_code(self):
@@ -48,3 +52,8 @@ class ViewsRelatoriosListTest(TestCase):
 
         for expected in collumns:
             self.assertContains(self.resp, expected)
+
+    def test_has_detalhar_button(self):
+        """Template should render detalhar button"""
+        expected = '<a class="btn btn-sm btn-outline-primary"'
+        self.assertContains(self.resp, expected)
