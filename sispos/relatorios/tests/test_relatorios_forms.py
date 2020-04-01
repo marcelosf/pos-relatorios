@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.forms import ModelChoiceField
 from sispos.relatorios.forms import RelatoriosForm
 from sispos.relatorios.tests import mock
 
@@ -22,7 +23,12 @@ class RelatoriosFormTest(TestCase):
             with self.subTest():
                 self.assertIn(expected, list(self.form.fields))
 
-    def test_orientador_choices(self):
-        """It should have a list of orientadores"""
-        expected = [(self.orientador.pk, self.orientador.name)]
-        self.assertListEqual(expected, self.form.fields['orientador'].choices)
+    def test_orientador_field_type(self):
+        """orientador should be a modelChoiceField"""
+        field = self.form.fields['orientador']
+        self.assertIsInstance(field, ModelChoiceField)
+
+    def test_orientador_is_required(self):
+        """field orientador should be required"""
+        field = self.form.fields['orientador']
+        self.assertTrue(field.required)
