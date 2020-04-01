@@ -5,5 +5,5 @@ from sispos.relatorios.models import Relatorios
 class RelatoriosTable(tables.Table):
     class Meta:
         model = Relatorios
-        template_name = 'django_tables2/bootstrap.html'
+        template_name = 'django_tables2/bootstrap4.html'
         fields = ('nome', 'created', 'orientador')
