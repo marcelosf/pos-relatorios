@@ -36,3 +36,7 @@ class RelatoriosTest(TestCase):
     def test_has_user(self):
         """It should have user_id property"""
         self.assertTrue(hasattr(self.obj, 'user'))
+
+    def test_relatorios_has_created_field(self):
+        """Relatorio should have a created field"""
+        self.assertTrue(hasattr(self.obj, 'created'))
