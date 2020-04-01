@@ -29,6 +29,11 @@ class ViewsRelatoriosListTest(TestCase):
         relatorios_list = self.resp.context['relatorios_list']
         self.assertIsInstance(relatorios_list, QuerySet)
 
+    def test_title(self):
+        """Template should render title"""
+        expected = 'Lista de relatórios'
+        self.assertContains(self.resp, expected)
+
     def test_html_tags(self):
         """Template should render html table tags"""
         tags = ['<table', '<th', '<tr']
