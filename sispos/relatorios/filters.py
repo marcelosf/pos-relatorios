@@ -1,19 +1,16 @@
 import django_filters
-from django.contrib.auth.models import Group
 from sispos.relatorios.models import Relatorios
+from sispos.accounts.models import User
 
 
-def get_orientadores():
-    group_data = {'name': 'orientador'}
-    orientadores_group, created = Group.objects.get_or_create(**group_data)
-    orientadores = orientadores_group.user_set.all()
-    return orientadores
+ORIENTADOR_GROUP_NAME = 'orientadores'
 
 
 class RelatoriosFilter(django_filters.FilterSet):
     nome = django_filters.CharFilter(label='Nome')
-    orientador = django_filters.ModelChoiceFilter(queryset=get_orientadores(),
-                                                  label='Orientadores')
+    orientador = django_filters.ModelChoiceFilter(
+        queryset=User.objects.filter(groups__name=ORIENTADOR_GROUP_NAME),
+        label='Orientadores')
     created = django_filters.DateFilter(label='Envio')
 
     class Meta:
