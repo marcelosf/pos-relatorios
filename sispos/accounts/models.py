@@ -21,7 +21,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(_("is active"))
     date_joined = models.DateTimeField(_("date joined"), auto_now_add=True)
 
-
     USERNAME_FIELD = 'login'
     REQUIRED_FIELDS = ['name', 'type', 'main_email']
     ALLOWED_UNIDADES = settings.ALLOWED_UNIDADES
@@ -29,6 +28,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
+
+    def __str__(self):
+        return self.get_full_name()
 
     objects = UserManager()
 

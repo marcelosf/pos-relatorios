@@ -1,0 +1,8 @@
+{% load bootstrap4 %}
+
+{% if filter %}
+    <form action="" method="GET" class="form form-inline">
+        {% bootstrap_form filter.form layout='inline' %}
+        {% bootstrap_button 'buscar' button_type='submit' button_class='btn-outline-primary' %}
+    </form>
+{% endif %}

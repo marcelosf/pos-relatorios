@@ -17,5 +17,4 @@ class RelatoriosForm(forms.Form):
         super(RelatoriosForm, self).__init__(*args, **kwargs)
         orientadores_group, created = Group.objects.get_or_create(**{'name': 'orientadores'})
         orientadores = orientadores_group.user_set.all()
-        choices = [(user.id, user.get_full_name()) for user in orientadores]
-        self.fields['orientador'] = forms.ChoiceField(label='Orientador',choices=choices)
+        self.fields['orientador'] = forms.ModelChoiceField(queryset=orientadores, label='Orientadores')
