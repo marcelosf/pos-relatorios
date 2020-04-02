@@ -63,3 +63,11 @@ class ViewsRelatoriosListTest(TestCase):
         """Template should render filters"""
         filter = self.resp.context['filter']
         self.assertIsInstance(filter, FilterSet)
+
+    def test_filter_fields(self):
+        """Template should render filter Fields"""
+        fields = ['name="nome"', 'name="orientador"', 'name="created"']
+
+        for expected in fields:
+            with self.subTest():
+                self.assertContains(self.resp, expected)
