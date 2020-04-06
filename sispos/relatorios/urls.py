@@ -6,5 +6,5 @@ app_name = 'relatorios'
 urlpatterns = [
     path('', views.relatorios_list, name='relatorios_list'),
     path('novo', views.relatorios_novo, name='relatorios_new'),
-    path('detalhar/<slug:slug>/', views.relatorios_update, name='relatorios_update')
+    path('update/<slug:slug>/', views.relatorios_update, name='relatorios_update')
 ]
