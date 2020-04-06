@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import resolve_url as r
 from sispos.accounts.models import User
 from uuid import uuid4
 
@@ -13,3 +14,6 @@ class Relatorios(models.Model):
     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)
     created = models.DateField('envio', auto_now_add=True)
     uuid = models.UUIDField('uuid', default=uuid4, editable=False)
+
+    def get_absolute_url(self):
+        return r('relatorios:relatorios_update', slug=str(self.uuid))
