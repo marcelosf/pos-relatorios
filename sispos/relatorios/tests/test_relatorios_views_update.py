@@ -58,3 +58,8 @@ class UpdateRelatorioTest(TestCase):
     def test_has_csrf_token(self):
         """It should render the csrf token"""
         self.assertContains(self.resp, 'csrfmiddlewaretoken')
+
+    def test_has_submit_button(self):
+        """It should render a submit button"""
+        expected = 'type="submit"'
+        self.assertContains(self.resp, expected)
