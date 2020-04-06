@@ -7,7 +7,9 @@ class RelatoriosTable(tables.Table):
     uuid = tables.Column(verbose_name='Ação')
 
     def render_uuid(self, value):
-        return format_html('<a class="btn btn-sm btn-outline-primary" href="#">Detalhar</a>')
+        tag = '<a class="btn btn-sm btn-outline-primary" \
+               href="detalhar/{}">Detalhar</a>'.format(str(value))
+        return format_html(tag)
 
     class Meta:
         model = Relatorios
