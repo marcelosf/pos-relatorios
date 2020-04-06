@@ -1,10 +1,12 @@
 from django import forms
 from django.contrib.auth.models import Group
+from sispos.accounts.models import User
 
 
 ORIENTADOR_CHOICES = (('Orientador 1', 'Orientador 1'), ('Orientador 2', 'Orientador 2'))
 RELATOR_CHOICES = (('Relator 1', 'Relator 1'), ('Relator 2', 'Relator 2'))
 PROGRAMA_CHOICES = (('Mestrado', 'Mestrado'), ('Doutorado', 'Doutorado'))
+RELATOR_GROUP_NAME = 'relatores'
 
 
 class RelatoriosForm(forms.Form):
@@ -18,3 +20,12 @@ class RelatoriosForm(forms.Form):
         orientadores_group, created = Group.objects.get_or_create(**{'name': 'orientadores'})
         orientadores = orientadores_group.user_set.all()
         self.fields['orientador'] = forms.ModelChoiceField(queryset=orientadores, label='Orientadores')
+
+
+class CoordenadorForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(CoordenadorForm, self).__init__()
+        Group.objects.get_or_create(**{'name': RELATOR_GROUP_NAME})
+        coordenadores = User.objects.filter(groups__name=RELATOR_GROUP_NAME)
+        self.fields['relator'] = forms.ModelChoiceField(queryset=coordenadores,
+                                                        label='Coordenador')
