@@ -43,7 +43,9 @@
             <div class="card-body">
                 <form action="#" method="post">
                     {% csrf_token %}
+                    {% bootstrap_messages %}
                     {% bootstrap_form form layout='inline' %}      
+                    <button type="submit" class="btn btn-outline-primary">Enviar</button>
                 </form>
             </div>
         </div>
