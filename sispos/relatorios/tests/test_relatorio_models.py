@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.db.models.fields.files import FileField
 from sispos.relatorios.models import Relatorios
 from sispos.relatorios.tests import mock
+from django.shortcuts import resolve_url as r
 
 
 class RelatoriosTest(TestCase):
@@ -44,3 +45,8 @@ class RelatoriosTest(TestCase):
     def test_relatorios_has_uuid_field(self):
         """Relatorio should have a created field"""
         self.assertTrue(hasattr(self.obj, 'uuid'))
+
+    def test_get_absolute_url(self):
+        """It should be /relatorios/update"""
+        expected = r('relatorios:relatorios_update', slug=str(self.obj.uuid))
+        self.assertEqual(expected, self.obj.get_absolute_url())
