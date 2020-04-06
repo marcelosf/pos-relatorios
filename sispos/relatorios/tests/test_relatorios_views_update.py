@@ -63,3 +63,8 @@ class UpdateRelatorioTest(TestCase):
         """It should render a submit button"""
         expected = 'type="submit"'
         self.assertContains(self.resp, expected)
+
+    def test_form_action(self):
+        """form action should be /relatorios/update/"""
+        expected = 'relatorios/update/{}'.format(str(self.relatorio.uuid))
+        self.assertContains(self.resp, expected)
