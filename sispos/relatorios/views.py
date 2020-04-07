@@ -25,7 +25,7 @@ relatorios_list = RelatoriosList.as_view()
 
 class RelatorioUpdate(UpdateView):
     model = Relatorios
-    form_class = CoordenadorForm
+    fields = ['relator']
     template_name = 'relatorios_update.html'
     context_object_name = 'relatorio'
     slug_field = 'uuid'
