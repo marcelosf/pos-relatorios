@@ -1,4 +1,4 @@
-from django.shortcuts import render, resolve_url as r
+from django.shortcuts import render
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -7,7 +7,7 @@ from django_tables2 import SingleTableMixin, LazyPaginator
 from django_filters.views import FilterView
 from django.views.generic import UpdateView
 from sispos.relatorios.filters import RelatoriosFilter
-from sispos.relatorios.forms import RelatoriosForm, CoordenadorForm
+from sispos.relatorios.forms import RelatoriosForm
 from sispos.relatorios.tables import RelatoriosTable
 from sispos.relatorios.models import Relatorios
 
