@@ -8,8 +8,8 @@ from sispos.relatorios.tests import mock
 class ViewsRelatoriosListTest(TestCase):
     def setUp(self):
         mock_relatorio = mock.MockRelatorio()
-        relatorio = mock_relatorio.make_relatorio()
-        mock_relatorio.save_relatorio(relatorio)
+        relatorio_data = mock_relatorio.make_relatorio()
+        self.relatorio = mock_relatorio.save_relatorio(relatorio_data)
         self.resp = self.client.get(r('relatorios:relatorios_list'))
 
     def test_status_code(self):
@@ -71,3 +71,9 @@ class ViewsRelatoriosListTest(TestCase):
         for expected in fields:
             with self.subTest():
                 self.assertContains(self.resp, expected)
+
+    def test_detalhar_link(self):
+        """Template should render the detalhar button link"""
+        relatorio_uuid = str(self.relatorio.uuid)
+        expected = 'href="{}"'.format('/relatorios/update/{}/'.format(relatorio_uuid))
+        self.assertContains(self.resp, expected)

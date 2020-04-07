@@ -1,12 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, resolve_url as r
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django_tables2 import SingleTableMixin, LazyPaginator
 from django_filters.views import FilterView
+from django.views.generic import UpdateView
 from sispos.relatorios.filters import RelatoriosFilter
-from sispos.relatorios.forms import RelatoriosForm
+from sispos.relatorios.forms import RelatoriosForm, CoordenadorForm
 from sispos.relatorios.tables import RelatoriosTable
 from sispos.relatorios.models import Relatorios
 
@@ -20,6 +21,17 @@ class RelatoriosList(SingleTableMixin, FilterView):
 
 
 relatorios_list = RelatoriosList.as_view()
+
+
+class RelatorioUpdate(UpdateView):
+    model = Relatorios
+    form_class = CoordenadorForm
+    template_name = 'relatorios_update.html'
+    context_object_name = 'relatorio'
+    slug_field = 'uuid'
+
+
+relatorios_update = RelatorioUpdate.as_view()
 
 
 @login_required(login_url=settings.LOGIN_URL)
