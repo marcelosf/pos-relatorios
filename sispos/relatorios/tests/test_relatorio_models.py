@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.db.models.fields.files import FileField
+from django.db.models.fields.related import ForeignKey
 from sispos.relatorios.models import Relatorios
 from sispos.relatorios.tests import mock
 from django.shortcuts import resolve_url as r
@@ -20,9 +21,14 @@ class RelatoriosTest(TestCase):
         self.assertEqual(1, Relatorios.objects.count())
 
     def test_relator_not_required(self):
-        """relator field should not be required"""
+        """relator field should be nullable"""
         field = Relatorios.relator.field
-        self.assertTrue(field.blank)
+        self.assertTrue(field.null)
+
+    def test_relator_is_foreign_key(self):
+        """relator field should be a foreignkey"""
+        field = Relatorios.relator.field
+        self.assertIsInstance(field, ForeignKey)
 
     def test_relatorio_is_file_field(self):
         """relatorio should be FileField"""

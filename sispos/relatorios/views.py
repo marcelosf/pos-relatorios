@@ -1,4 +1,4 @@
-from django.shortcuts import render, resolve_url as r
+from django.shortcuts import render
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -6,8 +6,9 @@ from django.template.loader import render_to_string
 from django_tables2 import SingleTableMixin, LazyPaginator
 from django_filters.views import FilterView
 from django.views.generic import UpdateView
+from django.contrib.messages.views import SuccessMessageMixin
 from sispos.relatorios.filters import RelatoriosFilter
-from sispos.relatorios.forms import RelatoriosForm, CoordenadorForm
+from sispos.relatorios.forms import RelatoriosForm
 from sispos.relatorios.tables import RelatoriosTable
 from sispos.relatorios.models import Relatorios
 
@@ -23,12 +24,13 @@ class RelatoriosList(SingleTableMixin, FilterView):
 relatorios_list = RelatoriosList.as_view()
 
 
-class RelatorioUpdate(UpdateView):
+class RelatorioUpdate(SuccessMessageMixin, UpdateView):
     model = Relatorios
-    form_class = CoordenadorForm
+    fields = ['relator']
     template_name = 'relatorios_update.html'
     context_object_name = 'relatorio'
     slug_field = 'uuid'
+    success_message = 'Relator atribuido com sucesso.'
 
 
 relatorios_update = RelatorioUpdate.as_view()
