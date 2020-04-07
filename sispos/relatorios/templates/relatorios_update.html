@@ -39,7 +39,10 @@
         </div>
 
         <div class="card shadow mt-3">
-            <div class="card-header"><h4>Encaminhar para o relator</h4></div>
+            <div class="card-header">
+                <h4>Encaminhar para o relator</h4>
+                {% bootstrap_form_errors form %}
+            </div>
             <div class="card-body">
                 <form action="{{ relatorio.get_absolute_url }}" method="post">
                     {% csrf_token %}
