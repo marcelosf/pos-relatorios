@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, resolve_url as r
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
