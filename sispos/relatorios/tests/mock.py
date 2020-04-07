@@ -28,6 +28,12 @@ class MockUser():
         self.set_group(group_name='orientadores', user=orientador)
         return orientador
 
+    def make_relator(self):
+        user_data = self.make_user_data(name='relator')
+        relator = self.save_user(user_data)
+        self.set_group(group_name='relatores', user=relator)
+        return relator
+
     def set_permission(self, perm_codename, user):
         perms = Permission.objects.get(codename=perm_codename)
         user.user_permissions.set([perms])
