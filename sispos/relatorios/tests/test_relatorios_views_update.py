@@ -68,3 +68,19 @@ class UpdateRelatorioTest(TestCase):
         """form action should be /relatorios/update/"""
         expected = 'relatorios/update/{}'.format(str(self.relatorio.uuid))
         self.assertContains(self.resp, expected)
+
+
+class UpdateRelatorioPostTest(TestCase):
+    def setUp(self):
+        mock_relatorio = mock.MockRelatorio()
+        relatorio_data = mock_relatorio.make_relatorio()
+        relatorio = mock_relatorio.save_relatorio(relatorio_data)
+        mock_relator = mock.MockUser()
+        relator = mock_relator.make_relator()
+        self.resp = self.client.post(r('relatorios:relatorios_update',
+                                       slug=str(relatorio.uuid)),
+                                     {'relator': relator.pk})
+
+    def test_relatorio_updated(self):
+        relatorio = Relatorios.objects.last()
+        self.assertTrue(relatorio.relator)
