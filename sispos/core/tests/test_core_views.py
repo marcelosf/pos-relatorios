@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
+from sispos.relatorios.tests import mock
 
 
 class CoreViewsTest(TestCase):
@@ -58,6 +59,31 @@ class CoreViewsTest(TestCase):
     def test_enviar_relatorio_form_link(self):
         """Template should render relatorio form link"""
         self.assertContains(self.resp, r('relatorios:relatorios_new'))
+
+    def test_login_button(self):
+        """It should render the login button"""
+        expected = 'Login'
+        self.assertContains(self.resp, expected)
+
+    def test_login_link(self):
+        """It should render the login link"""
+        expected = r('accounts:login')
+        self.assertContains(self.resp, expected)
+
+
+class CoreViewTestUserLoggedIn(TestCase):
+    def setUp(self):
+        mock_user = mock.MockUser()
+        self.user = mock_user.make_coordenador()
+        self.client.force_login(self.user)
+        self.resp = self.client.get(r('core:index'))
+
+    def test_logout_button(self):
+        """It should render the logout button"""
+        content = ['Logout', self.user.get_full_name()]
+        for expected in content:
+            with self.subTest():
+                self.assertContains(self.resp, expected)
 
 
 class CoreViewsPageErrorTest(TestCase):

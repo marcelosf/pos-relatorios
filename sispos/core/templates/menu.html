@@ -1,3 +1,25 @@
 <nav class="shadow navbar fixed-top navbar-expand-lg navbar-light bg-light">
     <a href="#" class="navbar-brand">SISPOS</a>
+    
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+    </ul>
+    {% if not user.is_authenticated %}
+        <a href="{% url 'accounts:login' %}" class="btn btn-outline-primary">Login</a>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <div class="dropdown">
+            <button 
+                class="btn btn-outline-primary" 
+                id="dropdown-login" 
+                data-toggle="dropdown" 
+                area-haspopup="true" 
+                area-expanded="false"
+            >
+            {{ user.get_full_name }}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdown-login">
+                <a href="{% url 'accounts:logout' %}" class="dropdown-item">Logout</a>
+            </div>
+        </div>
+    {% endif %}
 </nav>

@@ -78,7 +78,8 @@ class ViewsRelatoriosListTest(TestCase):
     def test_detalhar_link(self):
         """Template should render the detalhar button link"""
         relatorio_uuid = str(self.relatorio.uuid)
-        expected = 'href="{}"'.format('/relatorios/update/{}/'.format(relatorio_uuid))
+        url = '/relatorios/update/{}/'.format(relatorio_uuid)
+        expected = 'href="{}"'.format(url)
         self.assertContains(self.resp, expected)
 
     def test_relator(self):
