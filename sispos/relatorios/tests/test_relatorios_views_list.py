@@ -77,3 +77,12 @@ class ViewsRelatoriosListTest(TestCase):
         relatorio_uuid = str(self.relatorio.uuid)
         expected = 'href="{}"'.format('/relatorios/update/{}/'.format(relatorio_uuid))
         self.assertContains(self.resp, expected)
+
+
+class ViewsRelatoriosListLoggedOutTest(TestCase):
+    def setUp(self):
+        self.resp = self.client.get(r('relatorios:relatorios_list'))
+
+    def test_page_redirect(self):
+        """Status code should be 302"""
+        self.assertEqual(302, self.resp.status_code)
