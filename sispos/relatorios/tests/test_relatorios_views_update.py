@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
+from django.core import mail
 from sispos.relatorios.models import Relatorios
 from sispos.relatorios.tests import mock
 
@@ -95,6 +96,7 @@ class UpdateRelatorioPostTest(TestCase):
         coordenador = mock_user.make_coordenador()
         self.client.force_login(coordenador)
         relator = mock_user.make_relator()
+        mail.outbox = []
         self.resp = self.client.post(r('relatorios:relatorios_update',
                                        slug=str(relatorio.uuid)),
                                      {'relator': relator.pk})
@@ -102,3 +104,6 @@ class UpdateRelatorioPostTest(TestCase):
     def test_relatorio_updated(self):
         relatorio = Relatorios.objects.last()
         self.assertTrue(relatorio.relator)
+
+    def test_send_email(self):
+        self.assertEqual(1, len(mail.outbox))
