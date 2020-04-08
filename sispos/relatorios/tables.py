@@ -16,4 +16,4 @@ class RelatoriosTable(tables.Table):
     class Meta:
         model = Relatorios
         template_name = 'django_tables2/bootstrap4.html'
-        fields = ('nome', 'created', 'orientador', 'uuid')
+        fields = ('nome', 'created', 'relator', 'orientador', 'uuid')

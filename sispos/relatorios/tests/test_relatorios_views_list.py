@@ -81,6 +81,10 @@ class ViewsRelatoriosListTest(TestCase):
         expected = 'href="{}"'.format('/relatorios/update/{}/'.format(relatorio_uuid))
         self.assertContains(self.resp, expected)
 
+    def test_relator(self):
+        """List shoud have relator column"""
+        self.assertContains(self.resp, 'Relator')
+
 
 class ViewsRelatoriosListLoggedOutTest(TestCase):
     def setUp(self):
