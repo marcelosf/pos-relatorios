@@ -6,6 +6,9 @@ from sispos.relatorios.tests import mock
 
 class UpdateRelatorioTest(TestCase):
     def setUp(self):
+        mock_user = mock.MockUser()
+        coordenador = mock_user.make_coordenador()
+        self.client.force_login(coordenador)
         mock_relatorio = mock.MockRelatorio()
         self.relatorio_data = mock_relatorio.make_relatorio()
         self.relatorio = mock_relatorio.save_relatorio(self.relatorio_data)
@@ -70,13 +73,28 @@ class UpdateRelatorioTest(TestCase):
         self.assertContains(self.resp, expected)
 
 
+class UpdateRelatoriosLoggedOutTest(TestCase):
+    def setUp(self):
+        mock_relatorio = mock.MockRelatorio()
+        self.relatorio_data = mock_relatorio.make_relatorio()
+        self.relatorio = mock_relatorio.save_relatorio(self.relatorio_data)
+        self.resp = self.client.get(r('relatorios:relatorios_update',
+                                    slug=str(self.relatorio.uuid)))
+
+    def test_redirect_logged_out_user(self):
+        """Status code should be 302"""
+        self.assertEqual(302, self.resp.status_code)
+
+
 class UpdateRelatorioPostTest(TestCase):
     def setUp(self):
         mock_relatorio = mock.MockRelatorio()
         relatorio_data = mock_relatorio.make_relatorio()
         relatorio = mock_relatorio.save_relatorio(relatorio_data)
-        mock_relator = mock.MockUser()
-        relator = mock_relator.make_relator()
+        mock_user = mock.MockUser()
+        coordenador = mock_user.make_coordenador()
+        self.client.force_login(coordenador)
+        relator = mock_user.make_relator()
         self.resp = self.client.post(r('relatorios:relatorios_update',
                                        slug=str(relatorio.uuid)),
                                      {'relator': relator.pk})
