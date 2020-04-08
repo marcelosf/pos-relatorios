@@ -10,6 +10,9 @@ class ViewsRelatoriosListTest(TestCase):
         mock_relatorio = mock.MockRelatorio()
         relatorio_data = mock_relatorio.make_relatorio()
         self.relatorio = mock_relatorio.save_relatorio(relatorio_data)
+        mock_user = mock.MockUser()
+        relator = mock_user.make_relator()
+        self.client.force_login(relator)
         self.resp = self.client.get(r('relatorios:relatorios_list'))
 
     def test_status_code(self):
