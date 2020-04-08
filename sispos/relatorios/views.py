@@ -7,13 +7,14 @@ from django_tables2 import SingleTableMixin, LazyPaginator
 from django_filters.views import FilterView
 from django.views.generic import UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from sispos.relatorios.filters import RelatoriosFilter
 from sispos.relatorios.forms import RelatoriosForm
 from sispos.relatorios.tables import RelatoriosTable
 from sispos.relatorios.models import Relatorios
 
 
-class RelatoriosList(SingleTableMixin, FilterView):
+class RelatoriosList(LoginRequiredMixin, SingleTableMixin, FilterView):
     model = Relatorios
     table_class = RelatoriosTable
     template_name = 'relatorios_list.html'
