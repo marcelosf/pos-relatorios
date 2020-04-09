@@ -4,27 +4,34 @@
 
 
 {% block content %}
-    <div class="container">
+    <div class="container-fluid">
         <div class="header-top">
-            <form 
-                action="{% url 'relatorios:relatorios_new' %}" 
-                method="post"
-                novalidate
-                enctype="multipart/form-data"
-            >
-                {% csrf_token %}
-                <div class="card shadow">
-                    <div class="card-header">
-                        <h4>Relatório de atividades</h4>
-                    </div>
-                    {% bootstrap_form_errors form %}
-                    <div class="card-body">
-                        {% bootstrap_messages %}
-                        {% bootstrap_form form %}
-                        <button class="btn btn-primary" type="submit">Enviar</button>
-                    </div>
+            <div class="row">
+                <div class="col-md-2">
+                    {% include 'sidebar.html' %}
                 </div>
-            </form>
+                <div class="col-md-10">
+                    <form 
+                        action="{% url 'relatorios:relatorios_new' %}" 
+                        method="post"
+                        novalidate
+                        enctype="multipart/form-data"
+                    >
+                        {% csrf_token %}
+                        <div class="card shadow">
+                            <div class="card-header">
+                                <h4>Relatório de atividades</h4>
+                            </div>
+                            {% bootstrap_form_errors form %}
+                            <div class="card-body">
+                                {% bootstrap_messages %}
+                                {% bootstrap_form form %}
+                                <button class="btn btn-primary" type="submit">Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock content %}

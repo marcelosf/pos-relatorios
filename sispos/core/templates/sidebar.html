@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <a 
+                href="{% url 'relatorios:relatorios_new' %}" 
+                class="list-group-item list-group-item-action {% if request.path ==  "/relatorios/novo" %}active{% endif %}"
+            >
+                    Enviar Relatório
+            </a>
+            <a 
+                href="{% url 'relatorios:relatorios_list' %}" 
+                class="list-group-item list-group-item-action {% if request.path == '/relatorios/' %}active{% endif %}"
+            >
+                Lista de Relatórios
+            </a>
+        </ul>
+    </div>
+</div>

@@ -86,6 +86,27 @@ class ViewsRelatoriosListTest(TestCase):
         """List shoud have relator column"""
         self.assertContains(self.resp, 'Relator')
 
+    def test_has_sidebar_menu(self):
+        """It should render the sidebar menu template"""
+        self.assertTemplateUsed(self.resp, 'sidebar.html')
+
+    def test_sidebar_menu_items(self):
+        """Sidebar menu should cointain items"""
+        items = ['Enviar Relatório', 'Lista de Relatórios']
+        for expected in items:
+            with self.subTest():
+                self.assertContains(self.resp, expected)
+
+    def test_sidebar_links(self):
+        """It should render item links"""
+        links = [
+                    r('relatorios:relatorios_new'),
+                    r('relatorios:relatorios_list')
+                ]
+        for expected in links:
+            with self.subTest():
+                self.assertContains(self.resp, expected)
+
 
 class ViewsRelatoriosListLoggedOutTest(TestCase):
     def setUp(self):
