@@ -86,6 +86,10 @@ class ViewsRelatoriosListTest(TestCase):
         """List shoud have relator column"""
         self.assertContains(self.resp, 'Relator')
 
+    def test_has_sidebar_menu(self):
+        """It should render the sidebar menu template"""
+        self.assertTemplateUsed(self.resp, 'sidebar.html')
+
 
 class ViewsRelatoriosListLoggedOutTest(TestCase):
     def setUp(self):
