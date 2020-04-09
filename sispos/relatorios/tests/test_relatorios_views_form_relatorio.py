@@ -55,6 +55,10 @@ class RelatoriosViewsGetTest(TestCase):
         form = self.resp.context['form']
         self.assertEqual('Jetson Four', form.initial['nome'])
 
+    def test_render_sidebar(self):
+        """It should render the sidebar"""
+        self.assertTemplateUsed(self.resp, 'sidebar.html')
+
 
 class RelatoriosViewsPostValidTest(TestCase):
     def setUp(self):
