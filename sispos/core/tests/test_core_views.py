@@ -16,8 +16,8 @@ class CoreViewsTest(TestCase):
         self.assertTemplateUsed(self.resp, 'index.html')
 
     def test_base_template(self):
-        """It should render base.html template"""
-        self.assertTemplateUsed(self.resp, 'base.html')
+        """It should render base_front.html template"""
+        self.assertTemplateUsed(self.resp, 'base_front.html')
 
     def test_menu_template(self):
         """It should render menu.html"""
