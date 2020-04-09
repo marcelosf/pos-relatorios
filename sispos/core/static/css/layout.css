@@ -3,6 +3,12 @@ body {
     background-color: #eaecec;
 }
 
+body.front {
+    background-image: url('/static/images/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .header-top {
     margin-top: 100px;
     margin-bottom: 50px;
