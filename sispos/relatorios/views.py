@@ -21,6 +21,12 @@ class RelatoriosList(LoginRequiredMixin, SingleTableMixin, FilterView):
     paginator_class = LazyPaginator
     filterset_class = RelatoriosFilter
 
+    def get_table_data(self):
+        user = self.request.user
+        if user.has_perm('relatorios.change_relatorios'):
+            return Relatorios.objects.all()
+        return user.relator.all()
+
 
 relatorios_list = RelatoriosList.as_view()
 
