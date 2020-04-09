@@ -75,6 +75,24 @@ class CoreViewsTest(TestCase):
         expected = 'href="/"'
         self.assertContains(self.resp, expected)
 
+    def test_has_no_list_relatorios_link(self):
+        """It should not render a link to relatorios list"""
+        expected = 'href="{}"'.format(r('relatorios:relatorios_list'))
+        self.assertNotContains(self.resp, expected)
+
+
+class CoreViewOrientadorLoggedInTest(TestCase):
+    def setUp(self):
+        mock_user = mock.MockUser()
+        self.user = mock_user.make_orientador()
+        self.client.force_login(self.user)
+        self.resp = self.client.get(r('core:index'))
+
+    def test_has_no_list_relatorios_link(self):
+        """It should not render a link to relatorios list"""
+        expected = 'href="{}"'.format(r('relatorios:relatorios_list'))
+        self.assertNotContains(self.resp, expected)
+
 
 class CoreViewTestUserLoggedIn(TestCase):
     def setUp(self):
@@ -97,6 +115,11 @@ class CoreViewTestUserLoggedIn(TestCase):
     def test_has_no_login_link(self):
         """It should not render login link"""
         self.assertNotContains(self.resp, r('accounts:login'))
+
+    def test_has_list_relatorios_link(self):
+        """It should render a link to relatorios list"""
+        expected = 'href="{}"'.format(r('relatorios:relatorios_list'))
+        self.assertContains(self.resp, expected)
 
 
 class CoreViewsPageErrorTest(TestCase):
