@@ -70,6 +70,11 @@ class CoreViewsTest(TestCase):
         expected = r('accounts:login')
         self.assertContains(self.resp, expected)
 
+    def test_has_home_link(self):
+        """Logo should be a link to home"""
+        expected = 'href="/"'
+        self.assertContains(self.resp, expected)
+
 
 class CoreViewTestUserLoggedIn(TestCase):
     def setUp(self):
@@ -84,6 +89,15 @@ class CoreViewTestUserLoggedIn(TestCase):
         for expected in content:
             with self.subTest():
                 self.assertContains(self.resp, expected)
+
+    def test_has_no_login_button(self):
+        """It should not render login button"""
+        self.assertNotContains(self.resp, 'Login')
+
+    def test_has_no_login_link(self):
+        """It should not render login link"""
+        self.assertNotContains(self.resp, r('accounts:login'))
+
 
 
 class CoreViewsPageErrorTest(TestCase):
