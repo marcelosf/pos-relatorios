@@ -90,6 +90,13 @@ class ViewsRelatoriosListTest(TestCase):
         """It should render the sidebar menu template"""
         self.assertTemplateUsed(self.resp, 'sidebar.html')
 
+    def test_sidebar_menu_items(self):
+        """Sidebar menu should cointain items"""
+        items = ['Enviar relatório</li>', 'Lista de relatórios</li>']
+        for expected in items:
+            with self.subTest():
+                self.assertContains(self.resp, expected)
+
 
 class ViewsRelatoriosListLoggedOutTest(TestCase):
     def setUp(self):
