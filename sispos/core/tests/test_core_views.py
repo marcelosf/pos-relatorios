@@ -99,7 +99,6 @@ class CoreViewTestUserLoggedIn(TestCase):
         self.assertNotContains(self.resp, r('accounts:login'))
 
 
-
 class CoreViewsPageErrorTest(TestCase):
     def setUp(self):
         self.resp = self.client.get('/not-exists/')
