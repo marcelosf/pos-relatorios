@@ -92,8 +92,15 @@ class ViewsRelatoriosListTest(TestCase):
 
     def test_sidebar_menu_items(self):
         """Sidebar menu should cointain items"""
-        items = ['Enviar relatório</li>', 'Lista de relatórios</li>']
+        items = ['Enviar Relatório', 'Lista de Relatórios']
         for expected in items:
+            with self.subTest():
+                self.assertContains(self.resp, expected)
+
+    def test_sidebar_links(self):
+        """It should render item links"""
+        links = [r('relatorios:relatorios_new'), r('relatorios:relatorios_list')]
+        for expected in links:
             with self.subTest():
                 self.assertContains(self.resp, expected)
 
