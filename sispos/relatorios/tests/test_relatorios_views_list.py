@@ -99,7 +99,10 @@ class ViewsRelatoriosListTest(TestCase):
 
     def test_sidebar_links(self):
         """It should render item links"""
-        links = [r('relatorios:relatorios_new'), r('relatorios:relatorios_list')]
+        links = [
+                    r('relatorios:relatorios_new'),
+                    r('relatorios:relatorios_list')
+                ]
         for expected in links:
             with self.subTest():
                 self.assertContains(self.resp, expected)
