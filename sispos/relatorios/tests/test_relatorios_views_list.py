@@ -11,8 +11,8 @@ class ViewsRelatoriosListTest(TestCase):
         relatorio_data = mock_relatorio.make_relatorio()
         self.relatorio = mock_relatorio.save_relatorio(relatorio_data)
         mock_user = mock.MockUser()
-        relator = mock_user.make_relator()
-        self.client.force_login(relator)
+        coordenador = mock_user.make_coordenador()
+        self.client.force_login(coordenador)
         self.resp = self.client.get(r('relatorios:relatorios_list'))
 
     def test_status_code(self):
@@ -106,6 +106,21 @@ class ViewsRelatoriosListTest(TestCase):
         for expected in links:
             with self.subTest():
                 self.assertContains(self.resp, expected)
+
+
+class ViewsRelatoriosListRelatorTest(TestCase):
+    def setUp(self):
+        mock_user = mock.MockUser()
+        relator = mock_user.make_relator()
+        mock_relatorio = mock.MockRelatorio()
+        relatorio_data = mock_relatorio.make_relatorio()
+        self.relatorio = mock_relatorio.save_relatorio(relatorio_data)
+        self.client.force_login(relator)
+        self.resp = self.client.get(r('relatorios:relatorios_list'))
+
+    def test_has_no_relatorio(self):
+        """List should not have items"""
+        self.assertNotContains(self.resp, self.relatorio.nome)
 
 
 class ViewsRelatoriosListLoggedOutTest(TestCase):
