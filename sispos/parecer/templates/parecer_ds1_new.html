@@ -1,1 +1,19 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="header-top">
+        <div class="card shadow">
+            <div class="card-header"><h4>Precer do relator</h4></div>
+            <div class="card-body"> 
+                <form action="#" method="post">
+                    {% bootstrap_form form %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
