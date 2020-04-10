@@ -6,7 +6,7 @@ class Rds1Form(forms.Form):
                                  max_length=2048, widget=forms.Textarea)
     revisao = forms.CharField(label='Revisão Bibliográfica',
                               max_length=2048, widget=forms.Textarea)
-    definicao = forms.CharField(label='Definição do problema a ser investigado',
+    definicao = forms.CharField(label='Definição do problema',
                                 max_length=2048, widget=forms.Textarea)
     plano = forms.CharField(label='Plano de trabalho detalhado',
                             max_length=2048, widget=forms.Textarea)
