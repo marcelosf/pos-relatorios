@@ -23,3 +23,10 @@ class ParecerViewsGetTest(TestCase):
         """Context should have Rds1Form"""
         form = self.resp.context['form']
         self.assertIsInstance(form, Rds1Form)
+
+    def test_form_rendered(self):
+        """It should render the form"""
+        tags = ((1, '<form'), (6, '<textarea'), (1, '<input'))
+        for count, expected in tags:
+            with self.subTest():
+                self.assertContains(self.resp, expected, count)
