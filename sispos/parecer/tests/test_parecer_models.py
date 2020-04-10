@@ -17,7 +17,8 @@ class ParecerModelsTest(TestCase):
                   'plano', 'resultados', 'atividades']
         for expected in fields:
             with self.subTest():
-                self.assertTrue(hasattr(self.obj, expected), msg='{} not found'.format(expected))
+                self.assertTrue(hasattr(self.obj, expected),
+                                msg='{} not found'.format(expected))
 
     def test_created(self):
         mock_user = mock.MockUser()
