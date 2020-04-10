@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'viewflow',
     'test_without_migrations',
     'sispos.relatorios',
+    'sispos.parecer',
 ]
 
 MIDDLEWARE = [
