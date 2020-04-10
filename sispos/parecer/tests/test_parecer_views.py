@@ -26,7 +26,8 @@ class ParecerViewsGetTest(TestCase):
 
     def test_form_rendered(self):
         """It should render the form"""
-        tags = ((1, '<form'), (6, '<textarea'), (1, '<input'))
+        tags = ((1, '<form'), (6, '<textarea'), (1, '<input'),
+                (1, 'type="submit"'))
         for count, expected in tags:
             with self.subTest():
                 self.assertContains(self.resp, expected, count)
