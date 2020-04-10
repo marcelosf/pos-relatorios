@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
+from sispos.parecer.forms import Rds1Form
 
 
 class ParecerViewsGetTest(TestCase):
@@ -17,3 +18,8 @@ class ParecerViewsGetTest(TestCase):
     def test_extends_template(self):
         """It should extends base.html"""
         self.assertTemplateUsed(self.resp, 'base.html')
+
+    def test_context_has_form(self):
+        """Context should have Rds1Form"""
+        form = self.resp.context['form']
+        self.assertIsInstance(form, Rds1Form)
