@@ -1,9 +1,5 @@
-from django.views.generic import CreateView
+from django.shortcuts import render
 
 
 def parecer_new(request):
-    from django.http import HttpResponse
-    return HttpResponse()
-
-
-
+    return render(request, 'parecer_ds1_new.html')
