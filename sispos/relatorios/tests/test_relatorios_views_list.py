@@ -7,12 +7,12 @@ from sispos.relatorios.tests import mock
 
 class ViewsRelatoriosListTest(TestCase):
     def setUp(self):
-        mock_relatorio = mock.MockRelatorio()
-        relatorio_data = mock_relatorio.make_relatorio()
-        self.relatorio = mock_relatorio.save_relatorio(relatorio_data)
         mock_user = mock.MockUser()
-        relator = mock_user.make_relator()
-        self.client.force_login(relator)
+        coordenador = mock_user.make_coordenador()
+        mock_relatorio = mock.MockRelatorio()
+        relatorio_data = mock_relatorio.make_relatorio(relator=coordenador)
+        self.relatorio = mock_relatorio.save_relatorio(relatorio_data)
+        self.client.force_login(coordenador)
         self.resp = self.client.get(r('relatorios:relatorios_list'))
 
     def test_status_code(self):
@@ -106,6 +106,29 @@ class ViewsRelatoriosListTest(TestCase):
         for expected in links:
             with self.subTest():
                 self.assertContains(self.resp, expected)
+
+
+class ViewsRelatoriosListRelatorTest(TestCase):
+    def setUp(self):
+        mock_user = mock.MockUser()
+        self.relator = mock_user.make_relator()
+        self.client.force_login(self.relator)
+
+    def test_has_no_relatorio(self):
+        """List should not have items"""
+        mock_r = mock.MockRelatorio()
+        data = mock_r.make_relatorio()
+        relatorio = mock_r.save_relatorio(data)
+        resp = self.client.get(r('relatorios:relatorios_list'))
+        self.assertNotContains(resp, relatorio.nome)
+
+    def test_has_relatorio(self):
+        """List should have one relatorio"""
+        mock_r = mock.MockRelatorio()
+        data = mock_r.make_relatorio(relator=self.relator)
+        relatorio = mock_r.save_relatorio(data)
+        resp = self.client.get(r('relatorios:relatorios_list'))
+        self.assertContains(resp, relatorio.nome)
 
 
 class ViewsRelatoriosListLoggedOutTest(TestCase):
