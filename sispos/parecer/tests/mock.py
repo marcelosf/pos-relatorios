@@ -1,5 +1,6 @@
 from sispos.accounts.models import User
 from sispos.relatorios.models import Relatorios
+from sispos.parecer.models import Rds1
 from unittest import mock
 from django.core.files import File
 from django.contrib.auth.models import Permission, Group
@@ -48,3 +49,15 @@ class MockRelatorio():
         file_mock = mock.MagicMock(spec=File, name='file-mock')
         file_mock.name = 'file.pdf'
         return file_mock
+
+
+class MockParecer():
+    def make_parecer(self, **kwargs):
+        parecer_default = {'desempenho': 'desempenho', 'revisao': 'revisao',
+                           'definicao': 'definicao', 'plano': 'plano',
+                           'resultados': 'resultados',
+                           'atividades': 'atividades'}
+        return dict(parecer_default, **kwargs)
+
+    def save_parecer(self, parecer):
+        return Rds1.objects.create(**parecer)
