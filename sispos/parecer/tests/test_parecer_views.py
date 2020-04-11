@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
 from sispos.parecer.tests import mock
+from sispos.parecer.models import Rds1
 
 
 class ParecerViewsGetTest(TestCase):
@@ -42,12 +43,21 @@ class ParecerViewsGetTest(TestCase):
 
 class ParecerViewPostTest(TestCase):
     def setUp(self):
+        mock_user = mock.MockUser()
+        relator = mock_user.make_relator()
         mock_relatorio = mock.MockRelatorio()
         data = mock_relatorio.make_relatorio()
         relatorio = mock_relatorio.save_relatorio(data)
+        mock_parecer = mock.MockParecer()
+        parecer_data = mock_parecer.make_parecer()
+        self.client.force_login(relator)
         self.resp = self.client.post(r('parecer:parecer_new',
-                                       slug=str(relatorio.uuid)))
+                                       slug=str(relatorio.uuid)), parecer_data)
 
     def test_status_code(self):
         """Status code should be 200"""
         self.assertEqual(200, self.resp.status_code)
+
+    def test_parecer_created(self):
+        """It should create a parecer"""
+        self.assertTrue(Rds1.objects.exists())
