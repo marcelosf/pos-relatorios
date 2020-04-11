@@ -8,9 +8,9 @@ class ParecerViewsGetTest(TestCase):
     def setUp(self):
         mock_relatorio = mock.MockRelatorio()
         data = mock_relatorio.make_relatorio()
-        relatorio = mock_relatorio.save_relatorio(data)
+        self.relatorio = mock_relatorio.save_relatorio(data)
         self.resp = self.client.get(r('parecer:parecer_new',
-                                      slug=str(relatorio.uuid)))
+                                      slug=str(self.relatorio.uuid)))
 
     def test_status_code(self):
         """Sttatus code should be 200"""
@@ -31,6 +31,11 @@ class ParecerViewsGetTest(TestCase):
     def test_context_has_slug(self):
         """Context field should have slug"""
         self.assertIn('slug', self.resp.context)
+
+    def test_form_action(self):
+        expected = 'action="{}"'.format(r('parecer:parecer_new',
+                                        slug=str(self.relatorio.uuid)))
+        self.assertContains(self.resp, expected)
 
     def test_form_rendered(self):
         """It should render the form"""
