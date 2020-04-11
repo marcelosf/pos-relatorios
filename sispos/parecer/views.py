@@ -1,13 +1,20 @@
-from django.views.generic import CreateView
+from django.shortcuts import render
+from sispos.parecer.forms import Rds1Form
+from sispos.relatorios.models import Relatorios
 from sispos.parecer.models import Rds1
 
 
-class Rds1Create(CreateView):
-    fields = ['desempenho', 'revisao', 'definicao',
-              'plano', 'resultados', 'atividades']
-    model = Rds1
-    template_name = 'parecer_ds1_new.html'
-    slug_field = 'uuid'
+def parecer_new(request, slug):
+    if request.method == 'POST':
+        create_rds1(request, slug)
+    context = {'form': Rds1Form()}
+    return render(request, 'parecer_ds1_new.html', context)
 
 
-parecer_new = Rds1Create.as_view()
+def create_rds1(request, slug):
+    form = Rds1Form(request.POST)
+    if form.is_valid():
+        relatorio = Relatorios.objects.get(uuid=slug)
+        form.cleaned_data['relatorio'] = relatorio
+        form.cleaned_data['relator'] = request.user
+        Rds1.objects.create(**form.cleaned_data)
