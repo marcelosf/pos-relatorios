@@ -28,6 +28,10 @@ class ParecerViewsGetTest(TestCase):
         """Context should have Rds1Form"""
         self.assertIn('form', self.resp.context)
 
+    def test_context_has_slug(self):
+        """Context field should have slug"""
+        self.assertIn('slug', self.resp.context)
+
     def test_form_rendered(self):
         """It should render the form"""
         tags = ((1, '<form'), (6, '<textarea'), (1, '<input'),
