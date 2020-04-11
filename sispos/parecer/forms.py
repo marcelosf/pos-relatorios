@@ -14,4 +14,3 @@ class Rds1Form(forms.Form):
                                  max_length=2048, widget=forms.Textarea)
     atividades = forms.CharField(label='Outras atividades',
                                  max_length=2048, widget=forms.Textarea)
-    relatorio = forms.CharField(label='relatório', widget=forms.HiddenInput)
