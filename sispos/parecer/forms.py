@@ -1,4 +1,5 @@
 from django import forms
+from sispos.parecer.models import STATUS_CHOICES
 
 
 class Rds1Form(forms.Form):
@@ -14,3 +15,4 @@ class Rds1Form(forms.Form):
                                  max_length=2048, widget=forms.Textarea)
     atividades = forms.CharField(label='Outras atividades',
                                  max_length=2048, widget=forms.Textarea)
+    status = forms.ChoiceField(label='Status',choices=STATUS_CHOICES)
