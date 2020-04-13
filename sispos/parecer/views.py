@@ -12,6 +12,10 @@ def parecer_new(request, slug):
     return render(request, 'parecer_ds1_new.html', context)
 
 
+def parecer_rds2_new(request):
+    return render(request, 'parecer_ds2_new.html')
+
+
 def create_rds1(request, slug):
     form = Rds1Form(request.POST)
     if form.is_valid():
