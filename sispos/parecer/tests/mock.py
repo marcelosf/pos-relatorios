@@ -56,7 +56,7 @@ class MockParecer():
         parecer_default = {'desempenho': 'desempenho', 'revisao': 'revisao',
                            'definicao': 'definicao', 'plano': 'plano',
                            'resultados': 'resultados',
-                           'atividades': 'atividades'}
+                           'atividades': 'atividades', 'status': 'aprovado'}
         return dict(parecer_default, **kwargs)
 
     def save_parecer(self, parecer):
