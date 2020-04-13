@@ -22,3 +22,6 @@ def create_rds1(request, slug):
         context = {'form': form, 'slug': slug}
         messages.success(request, 'Parecer enviado com sucesso.')
         return render(request, 'parecer_ds1_new.html', context)
+    messages.error(request, 'Não foi possível enviar o parecer.')
+    context = {'form': form, 'slug': slug}
+    return render(request, 'parecer_ds1_new.html', context)
