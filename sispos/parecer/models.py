@@ -15,3 +15,6 @@ class Rds1(models.Model):
     relator = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     uuid = models.UUIDField('uuid', default=uuid4, editable=False)
+
+    def get_absolute_url(self):
+        return '/parecer/rds1/{}'.format(str(self.uuid))
