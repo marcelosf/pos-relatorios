@@ -70,3 +70,8 @@ class ParecerViewPostTest(TestCase):
     def test_parecer_created(self):
         """It should create a parecer"""
         self.assertTrue(Rds1.objects.exists())
+
+    def test_status_message(self):
+        """It should show status messages"""
+        expected = 'Parecer enviado com sucesso.'
+        self.assertContains(self.resp, expected)
