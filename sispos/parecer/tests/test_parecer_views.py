@@ -80,6 +80,10 @@ class ParecerViewPostTest(TestCase):
         expected = 'Parecer enviado com sucesso.'
         self.assertContains(self.resp, expected)
 
+    def test_has_status_field(self):
+        """It should render status field"""
+        self.assertContains(self.resp, 'Status')
+
 
 class ParecerViewInvalidPostTest(TestCase):
     def setUp(self):
