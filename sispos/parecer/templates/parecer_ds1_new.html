@@ -7,6 +7,7 @@
     <div class="header-top">
         <div class="card shadow">
             <div class="card-header"><h4>Precer do relator</h4></div>
+            {% bootstrap_messages %}
             <div class="card-body"> 
                 <form action="{% url 'parecer:parecer_new' slug %}" method="post">
                     {% csrf_token %}
