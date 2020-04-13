@@ -16,3 +16,19 @@ class Rds1Form(forms.Form):
     atividades = forms.CharField(label='Outras atividades',
                                  max_length=2048, widget=forms.Textarea)
     status = forms.ChoiceField(label='Status', choices=STATUS_CHOICES)
+
+
+class Rds2Form(forms.Form):
+    desempenho = forms.CharField(label='Desempenho nas disciplinas',
+                                 max_length=2048, widget=forms.Textarea)
+    metodologia = forms.CharField(label='Metodologia de trabalho',
+                                  max_length=2048, widget=forms.Textarea)
+    resultados = forms.CharField(label='Resultados',
+                                 max_length=2048, widget=forms.Textarea)
+    esboco = forms.CharField(label='Esboço de artigo científico',
+                             max_length=2048, widget=forms.Textarea)
+    atividades = forms.CharField(label='Outras atividades',
+                                 max_length=2048, widget=forms.Textarea)
+    relator = forms.CharField(label='relator',
+                              max_length=2048, widget=forms.Textarea)
+    status = forms.ChoiceField(label='Status', choices=STATUS_CHOICES)
