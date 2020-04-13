@@ -40,6 +40,12 @@ class ParecerModelsTest(TestCase):
         obj = self.make_parecer()
         self.assertTrue(hasattr(obj, 'uuid'))
 
+    def test_get_absolute_url(self):
+        """It dhould get the absolute url"""
+        obj = self.make_parecer()
+        expected = '/parecer/rds1/{}'.format(str(obj.uuid))
+        self.assertEqual(expected, obj.get_absolute_url())
+
     def make_parecer(self):
         mock_user = mock.MockUser()
         relator = mock_user.make_relator()
