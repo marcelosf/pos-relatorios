@@ -3,6 +3,10 @@ from sispos.relatorios.models import Relatorios
 from sispos.accounts.models import User
 from uuid import uuid4
 
+APROVADO = 'Aprovado'
+REPROVADO = 'Reprovado'
+STATUS_CHOICES = (('aprovado', APROVADO), ('reprovado', REPROVADO))
+
 
 class Rds1(models.Model):
     desempenho = models.TextField('desempenho', max_length=2048)
@@ -14,6 +18,7 @@ class Rds1(models.Model):
     relatorio = models.ForeignKey(Relatorios, on_delete=models.CASCADE)
     relator = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField('status', max_length=12, choices=STATUS_CHOICES)
     uuid = models.UUIDField('uuid', default=uuid4, editable=False)
 
     def get_absolute_url(self):

@@ -46,6 +46,11 @@ class ParecerModelsTest(TestCase):
         expected = '/parecer/rds1/{}'.format(str(obj.uuid))
         self.assertEqual(expected, obj.get_absolute_url())
 
+    def test_has_status_attr(self):
+        """Rds1 should contain the status attribute"""
+        obj = self.make_parecer()
+        self.assertTrue(hasattr(obj, 'status'))
+
     def make_parecer(self):
         mock_user = mock.MockUser()
         relator = mock_user.make_relator()

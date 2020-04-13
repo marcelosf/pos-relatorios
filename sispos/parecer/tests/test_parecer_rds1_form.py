@@ -13,3 +13,7 @@ class ParecerRds1FormTest(TestCase):
         for expected in fields:
             with self.subTest():
                 self.assertIn(expected, list(self.form.fields))
+
+    def test_has_status_field(self):
+        """It should have status field"""
+        self.assertIn('status', list(self.form.fields))
