@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 from sispos.parecer.forms import Rds1Form
 from sispos.relatorios.models import Relatorios
 from sispos.parecer.models import Rds1
@@ -18,3 +19,6 @@ def create_rds1(request, slug):
         form.cleaned_data['relatorio'] = relatorio
         form.cleaned_data['relator'] = request.user
         Rds1.objects.create(**form.cleaned_data)
+        context = {'form': form, 'slug': slug}
+        messages.success(request, 'Parecer enviado com sucesso.')
+        return render(request, 'parecer_ds1_new.html', context)
