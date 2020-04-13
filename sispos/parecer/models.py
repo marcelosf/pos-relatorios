@@ -1,6 +1,7 @@
 from django.db import models
 from sispos.relatorios.models import Relatorios
 from sispos.accounts.models import User
+from uuid import uuid4
 
 
 class Rds1(models.Model):
@@ -13,3 +14,4 @@ class Rds1(models.Model):
     relatorio = models.ForeignKey(Relatorios, on_delete=models.CASCADE)
     relator = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    uuid = models.UUIDField('uuid', default=uuid4, editable=False)
