@@ -9,7 +9,7 @@
             <div class="card-header"><h4>Precer do relator</h4></div>
             {% bootstrap_messages %}
             <div class="card-body"> 
-                <form action="{% url 'parecer:parecer_new' slug %}" method="post">
+                <form novalidate action="{% url 'parecer:parecer_new' slug %}" method="post">
                     {% csrf_token %}
                     {% bootstrap_form form %}
                     <button class="btn btn-outline-primary" type="submit">Enviar</button>
