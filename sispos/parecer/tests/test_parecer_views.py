@@ -49,6 +49,10 @@ class ParecerViewsGetTest(TestCase):
         """It should render the csrf middleware"""
         self.assertContains(self.resp, 'csrfmiddlewaretoken')
 
+    def test_form_novalidate(self):
+        """Form should have novalidate attr"""
+        self.assertContains(self.resp, 'novalidate')
+
 
 class ParecerViewPostTest(TestCase):
     def setUp(self):
