@@ -79,3 +79,19 @@ class ParecerViewPostTest(TestCase):
         """It should show status messages"""
         expected = 'Parecer enviado com sucesso.'
         self.assertContains(self.resp, expected)
+
+
+class ParecerViewInvalidPostTest(TestCase):
+    def setUp(self):
+        mock_user = mock.MockUser()
+        relator = mock_user.make_relator()
+        mock_relatorio = mock.MockRelatorio()
+        data = mock_relatorio.make_relatorio()
+        relatorio = mock_relatorio.save_relatorio(data)
+        self.client.force_login(relator)
+        self.resp = self.client.post(r('parecer:parecer_new',
+                                       slug=str(relatorio.uuid)), {})
+
+    def test_message(self):
+        expected = 'Não foi possível enviar o parecer.'
+        self.assertContains(self.resp, expected)
