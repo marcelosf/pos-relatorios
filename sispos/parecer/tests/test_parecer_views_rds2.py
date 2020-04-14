@@ -33,13 +33,16 @@ class ViewsPrecerGetTest(TestCase):
         self.assertContains(self.resp, expected)
 
 
-class ViewsParecerPostTest(TestCase):
+class ViewsParecerPostValidTest(TestCase):
     def setUp(self):
+        mock_user = mock.MockUser()
+        relator = mock_user.make_relator()
         mock_relatorio = mock.MockRelatorio()
         relatorio_data = mock_relatorio.make_relatorio()
         relatorio = mock_relatorio.save_relatorio(relatorio_data)
         mock_rds2 = mock.MockParecer()
         rds2_data = mock_rds2.make_rds2()
+        self.client.force_login(relator)
         self.resp = self.client.post(r('parecer:parecer_rds2_new',
                                      slug=str(relatorio.uuid)), rds2_data)
 
@@ -50,4 +53,18 @@ class ViewsParecerPostTest(TestCase):
     def test_form_is_valid(self):
         """Form data must be valid"""
         form = self.resp.context['form']
-        self.assertTrue(form.is_valid)
+        self.assertTrue(form.is_valid())
+
+
+class ViewsParecerPostInvalidTest(TestCase):
+    def setUp(self):
+        mock_relatorio = mock.MockRelatorio()
+        relatorio_data = mock_relatorio.make_relatorio()
+        relatorio = mock_relatorio.save_relatorio(relatorio_data)
+        self.resp = self.client.post(r('parecer:parecer_rds2_new',
+                                     slug=str(relatorio.uuid)), {})
+
+    def test_form_is_invalid(self):
+        """Form must be invalid"""
+        form = self.resp.context['form']
+        self.assertFalse(form.is_valid())
