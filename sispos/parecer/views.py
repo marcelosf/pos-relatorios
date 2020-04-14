@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import resolve_url as r
 from sispos.parecer.forms import Rds1Form, Rds2Form
 from sispos.relatorios.models import Relatorios
-from sispos.parecer.models import Rds1
+from sispos.parecer.models import Rds1, Rds2
 
 
 def parecer_new(request, slug):
@@ -11,12 +11,6 @@ def parecer_new(request, slug):
         create_rds1(request, slug)
     context = {'form': Rds1Form(), 'slug': slug}
     return render(request, 'parecer_ds1_new.html', context)
-
-
-def parecer_rds2_new(request, slug):
-    context = {'slug': slug, 'form': Rds2Form(),
-               'action': r('parecer:parecer_rds2_new', slug=slug)}
-    return render(request, 'parecer_new.html', context)
 
 
 def create_rds1(request, slug):
@@ -32,3 +26,20 @@ def create_rds1(request, slug):
     messages.error(request, 'Não foi possível enviar o parecer.')
     context = {'form': form, 'slug': slug}
     return render(request, 'parecer_ds1_new.html', context)
+
+
+def parecer_rds2_new(request, slug):
+    if request == 'POST':
+        create_rds2(request, slug)
+    context = {'slug': slug, 'form': Rds2Form(),
+               'action': r('parecer:parecer_rds2_new', slug=slug)}
+    return render(request, 'parecer_new.html', context)
+
+
+def create_rds2(request, slug):
+    form = Rds2Form(request.POST)
+    if form.is_valid:
+        relatorio = Relatorios.objects.get(uuid=slug)
+        form.cleaned_data['relatorio'] = relatorio
+        form.cleaned_data['relator'] = request.user
+        Rds2.objects.create(**form.cleaned_data)
