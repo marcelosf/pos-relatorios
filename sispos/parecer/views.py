@@ -9,7 +9,8 @@ from sispos.parecer.models import Rds1, Rds2
 def parecer_new(request, slug):
     if request.method == 'POST':
         create_rds1(request, slug)
-    context = {'form': Rds1Form(), 'slug': slug}
+    context = {'form': Rds1Form(), 'slug': slug,
+               'action': r('parecer:parecer_new', slug=slug)}
     return render(request, 'parecer_ds1_new.html', context)
 
 
