@@ -23,3 +23,16 @@ class Rds1(models.Model):
 
     def get_absolute_url(self):
         return '/parecer/rds1/{}'.format(str(self.uuid))
+
+
+class Rds2(models.Model):
+    desempenho = models.CharField('desempenho', max_length=2048)
+    metodologia = models.CharField('metodologia', max_length=2048)
+    resultados = models.CharField('resultados', max_length=2048)
+    esboco = models.CharField('esboco', max_length=2048)
+    atividades = models.CharField('atividades', max_length=2048)
+    relator = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.CharField('status', max_length=2048, choices=STATUS_CHOICES)
+    relatorio = models.ForeignKey(Relatorios, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    uuid = models.UUIDField('uuid', default=uuid4, editable=False)
