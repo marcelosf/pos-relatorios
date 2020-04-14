@@ -48,6 +48,7 @@ class MockRelatorio():
         relatorio_default = {'nome': 'Jetson Four', 'programa': 'Mestrado',
                              'orientador': 'Orientador 1',
                              'relatorio': self.make_file(),
+                             'semestre': 'rds1',
                              'encaminhamento': self.make_file()}
         relatorio = dict(relatorio_default, **kwargs)
         return relatorio

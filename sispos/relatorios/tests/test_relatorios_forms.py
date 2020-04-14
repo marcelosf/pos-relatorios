@@ -32,3 +32,7 @@ class RelatoriosFormTest(TestCase):
         """field orientador should be required"""
         field = self.form.fields['orientador']
         self.assertTrue(field.required)
+    
+    def test_has_semestre_field(self):
+        """It must have the semestre field"""
+        self.assertIn('semestre', list(self.form.fields))

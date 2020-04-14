@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import Group
 from sispos.accounts.models import User
+from sispos.relatorios.models import SEMESTER_CHOICES
 
 
 ORIENTADOR_CHOICES = (('Orientador 1', 'Orientador 1'), ('Orientador 2', 'Orientador 2'))
@@ -14,6 +15,7 @@ class RelatoriosForm(forms.Form):
     programa = forms.ChoiceField(label='Programa', choices=PROGRAMA_CHOICES)
     relatorio = forms.FileField(label='Relatório')
     encaminhamento = forms.FileField(label='Encaminhamento')
+    semestre = forms.ChoiceField(label='Semestre', choices=SEMESTER_CHOICES)
 
     def __init__(self, *args, **kwargs):
         super(RelatoriosForm, self).__init__(*args, **kwargs)
