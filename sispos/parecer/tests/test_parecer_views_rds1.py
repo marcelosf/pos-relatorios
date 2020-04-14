@@ -17,8 +17,8 @@ class ParecerViewsGetTest(TestCase):
         self.assertEqual(200, self.resp.status_code)
 
     def test_template(self):
-        """It should render parecer_ds1_new.html template"""
-        self.assertTemplateUsed(self.resp, 'parecer_ds1_new.html')
+        """It should render parecer_new.html template"""
+        self.assertTemplateUsed(self.resp, 'parecer_new.html')
 
     def test_extends_template(self):
         """It should extends base.html"""

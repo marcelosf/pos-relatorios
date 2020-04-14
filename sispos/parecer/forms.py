@@ -29,6 +29,4 @@ class Rds2Form(forms.Form):
                              max_length=2048, widget=forms.Textarea)
     atividades = forms.CharField(label='Outras atividades',
                                  max_length=2048, widget=forms.Textarea)
-    relator = forms.CharField(label='relator',
-                              max_length=2048, widget=forms.Textarea)
     status = forms.ChoiceField(label='Status', choices=STATUS_CHOICES)
