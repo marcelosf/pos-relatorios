@@ -31,3 +31,18 @@ class ViewsPrecerGetTest(TestCase):
         expected = 'action="{}"'.format(r('parecer:parecer_rds2_new',
                                           slug=str(self.relatorio.uuid)))
         self.assertContains(self.resp, expected)
+
+
+class ViewsParecerPostTest(TestCase):
+    def setUp(self):
+        mock_relatorio = mock.MockRelatorio()
+        relatorio_data = mock_relatorio.make_relatorio()
+        relatorio = mock_relatorio.save_relatorio(relatorio_data)
+        mock_rds2 = mock.MockParecer()
+        rds2_data = mock_rds2.make_rds2()
+        self.resp = self.client.post(r('parecer:parecer_rds2_new',
+                                     slug=str(relatorio.uuid)), rds2_data)
+
+    def test_status_code(self):
+        """Status code must be 200"""
+        self.assertEqual(200, self.resp.status_code)
