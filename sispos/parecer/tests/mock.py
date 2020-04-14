@@ -1,6 +1,6 @@
 from sispos.accounts.models import User
 from sispos.relatorios.models import Relatorios
-from sispos.parecer.models import Rds1
+from sispos.parecer.models import Rds1, Rds2
 from unittest import mock
 from django.core.files import File
 from django.contrib.auth.models import Permission, Group
@@ -61,3 +61,13 @@ class MockParecer():
 
     def save_parecer(self, parecer):
         return Rds1.objects.create(**parecer)
+
+    def make_rds2(self, **kwargs):
+        rds2_default = {'desempenho': 'desempenho',
+                        'metodologia': 'metodologia',
+                        'resultados': 'resultados', 'esboco': 'esboco',
+                        'atividades': 'atividades', 'status': 'aprovado'}
+        return dict(rds2_default, **kwargs)
+
+    def save_rds2(self, parecer):
+        return Rds2.objects.create(**parecer)
