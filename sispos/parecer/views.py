@@ -29,7 +29,7 @@ def create_rds1(request, slug):
 
 
 def parecer_rds2_new(request, slug):
-    if request == 'POST':
+    if request.method == 'POST':
         create_rds2(request, slug)
     context = {'slug': slug, 'form': Rds2Form(),
                'action': r('parecer:parecer_rds2_new', slug=slug)}
@@ -38,8 +38,14 @@ def parecer_rds2_new(request, slug):
 
 def create_rds2(request, slug):
     form = Rds2Form(request.POST)
-    if form.is_valid:
+    if form.is_valid():
         relatorio = Relatorios.objects.get(uuid=slug)
         form.cleaned_data['relatorio'] = relatorio
         form.cleaned_data['relator'] = request.user
         Rds2.objects.create(**form.cleaned_data)
+        context = {'form': form, 'slug': slug,
+                   'action': r('parecer:parecer_rds2_new', slug=slug)}
+        return render(request, 'parecer_new.html', context)
+    context = {'form': form, 'slug': slug,
+               'action': r('parecer:parecer_rds2_new', slug=slug)}
+    return render(request, 'parecer_new.html', context)
