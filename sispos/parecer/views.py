@@ -45,6 +45,7 @@ def create_rds2(request, slug):
         Rds2.objects.create(**form.cleaned_data)
         context = {'form': form, 'slug': slug,
                    'action': r('parecer:parecer_rds2_new', slug=slug)}
+        messages.success(request, 'Parecer enviado com sucesso.')
         return render(request, 'parecer_new.html', context)
     context = {'form': form, 'slug': slug,
                'action': r('parecer:parecer_rds2_new', slug=slug)}
