@@ -56,3 +56,7 @@ class RelatoriosTest(TestCase):
         """It should be /relatorios/update"""
         expected = r('relatorios:relatorios_update', slug=str(self.obj.uuid))
         self.assertEqual(expected, self.obj.get_absolute_url())
+
+    def test_has_semestre_attr(self):
+        """It must have semestre attr"""
+        self.assertTrue(hasattr(self.obj, 'semestre'))
