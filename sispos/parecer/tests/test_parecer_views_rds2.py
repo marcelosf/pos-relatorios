@@ -46,3 +46,8 @@ class ViewsParecerPostTest(TestCase):
     def test_status_code(self):
         """Status code must be 200"""
         self.assertEqual(200, self.resp.status_code)
+
+    def test_form_is_valid(self):
+        """Form data must be valid"""
+        form = self.resp.context['form']
+        self.assertTrue(form.is_valid)
