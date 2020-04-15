@@ -30,3 +30,12 @@ class Rds2Form(forms.Form):
     atividades = forms.CharField(label='Outras atividades',
                                  max_length=2048, widget=forms.Textarea)
     status = forms.ChoiceField(label='Status', choices=STATUS_CHOICES)
+
+
+class Rds3Form(forms.Form):
+    resultados = forms.CharField(label='Resultados', max_length=2048,
+                                 widget=forms.Textarea)
+    artigo = forms.CharField(label='Versão final de artigo científico',
+                             max_length=2048, widget=forms.Textarea)
+    atividades = forms.CharField(label='Outras atividades', max_length=2048,
+                                 widget=forms.Textarea)
