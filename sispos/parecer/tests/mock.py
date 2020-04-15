@@ -71,3 +71,8 @@ class MockParecer():
 
     def save_rds2(self, parecer):
         return Rds2.objects.create(**parecer)
+
+    def make_rds3(self, **kwargs):
+        rds3_default = {'resultados': 'resultados', 'artigo': 'artigo',
+                        'atividades': 'atividades', 'status': 'aprovado'}
+        return dict(rds3_default, **kwargs)
