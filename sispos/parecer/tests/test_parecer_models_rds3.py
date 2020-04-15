@@ -12,3 +12,10 @@ class Rds3ModelTest(TestCase):
         for expected in attrs:
             with self.subTest():
                 self.assertTrue(hasattr(self.obj, expected))
+
+    def test_has_foreign_keys(self):
+        """Rds3 must have foreign keys"""
+        fks = ['relatorio', 'relator']
+        for expected in fks:
+            with self.subTest():
+                self.assertTrue(hasattr(Rds3, expected))
