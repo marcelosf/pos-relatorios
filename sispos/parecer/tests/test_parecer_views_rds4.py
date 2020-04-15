@@ -51,3 +51,8 @@ class Rds4ViewPostTest(TestCase):
         """form must be valid"""
         form = self.resp.context['form']
         self.assertTrue(form.is_valid())
+
+    def test_success_message(self):
+        """It must show a success message"""
+        expected = 'Parecer enviado com sucesso.'
+        self.assertContains(self.resp, expected)
