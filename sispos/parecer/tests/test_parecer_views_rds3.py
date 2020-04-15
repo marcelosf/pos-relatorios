@@ -37,10 +37,20 @@ class Rds3ViewsPostTest(TestCase):
         relatorio_data = mock_relatorio.make_relatorio()
         relatorio = mock_relatorio.save_relatorio(relatorio_data)
         mock_rds3 = mock.MockParecer()
-        rds3_data = mock_rds3.make_rds3()
-        self.resp = self.client.get(r('parecer:parecer_rds3_new',
-                                      slug=str(relatorio.uuid)), rds3_data)
+        rds3_data = mock_rds3.make_rds3(relatorio=relatorio, relator=relator)
+        self.resp = self.client.post(r('parecer:parecer_rds3_new',
+                                       slug=str(relatorio.uuid)), rds3_data)
 
     def test_status_code(self):
         """Status code must be 200"""
         self.assertEqual(200, self.resp.status_code)
+
+    def test_form_is_valid(self):
+        """form must be valid"""
+        form = self.resp.context['form']
+        self.assertTrue(form.is_valid())
+
+    def test_message_success(self):
+        """It must show a success message"""
+        expected = 'Parecer enviado com sucesso.'
+        self.assertContains(self.resp, expected)
