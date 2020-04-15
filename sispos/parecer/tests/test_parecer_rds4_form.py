@@ -1,16 +1,14 @@
 from django.test import TestCase
-from django.shortcuts import resolve_url as r
-from sispos.parecer.tests import mock
+from sispos.parecer.forms import Rds4Form
 
 
-class Rds4ViewGetTest(TestCase):
+class Rds4FormTest(TestCase):
     def setUp(self):
-        mock_relatorio = mock.MockRelatorio()
-        relatorio_data = mock_relatorio.make_relatorio()
-        relatorio = mock_relatorio.save_relatorio(relatorio_data)
-        self.resp = self.client.get(r('parecer:parecer_rds4_new',
-                                      slug=str(relatorio.uuid)))
+        self.form = Rds4Form()
 
-    def test_status_code(self):
-        """Status code must be 200"""
-        self.assertEqual(200, self.resp.status_code)
+    def test_rds_attr(self):
+        """Rds4Form must have attr"""
+        attrs = ['perspectivas', 'status']
+        for expected in attrs:
+            with self.subTest():
+                self.assertIn(expected, list(self.form.fields))
