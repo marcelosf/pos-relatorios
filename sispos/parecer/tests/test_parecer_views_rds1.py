@@ -53,6 +53,10 @@ class ParecerViewsGetTest(TestCase):
         """Form should have novalidate attr"""
         self.assertContains(self.resp, 'novalidate')
 
+    def test_side_bar(self):
+        """It must render sidebar.html"""
+        self.assertTemplateUsed(self.resp, 'sidebar.html')
+
 
 class ParecerViewPostTest(TestCase):
     def setUp(self):
