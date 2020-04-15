@@ -14,3 +14,12 @@ class Rds4ViewGetTest(TestCase):
     def test_status_code(self):
         """Status code must be 200"""
         self.assertEqual(200, self.resp.status_code)
+
+    def test_template(self):
+        """It should render parecer_new.html template"""
+        self.assertTemplateUsed(self.resp, 'parecer_new.html')
+
+    def test_context_has_form(self):
+        """Context must have a form"""
+        context = self.resp.context
+        self.assertIn('form', context)
