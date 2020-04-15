@@ -41,3 +41,8 @@ class Rds4ViewPostTest(TestCase):
     def test_status_code(self):
         """Status code must be 200"""
         self.assertEqual(200, self.resp.status_code)
+
+    def test_context_has_form(self):
+        """Context must have form"""
+        context = self.resp.context
+        self.assertIn('form', context)
