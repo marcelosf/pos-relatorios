@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib import messages
 from django.shortcuts import resolve_url as r
-from sispos.parecer.forms import Rds1Form, Rds2Form
+from sispos.parecer.forms import Rds1Form, Rds2Form, Rds3Form
 from sispos.relatorios.models import Relatorios
 from sispos.parecer.models import Rds1, Rds2
 
@@ -19,6 +19,12 @@ def parecer_rds2_new(request, slug):
         create_parecer(request, slug, Rds2, Rds2Form)
     context = {'slug': slug, 'form': Rds2Form(),
                'action': r('parecer:parecer_rds2_new', slug=slug)}
+    return render(request, 'parecer_new.html', context)
+
+
+def parecer_rds3_new(request, slug):
+    context = {'form': Rds3Form(), 'slug': slug,
+               'action': r('parecer:parecer_rds3_new', slug=slug)}
     return render(request, 'parecer_new.html', context)
 
 
