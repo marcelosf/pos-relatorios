@@ -30,6 +30,11 @@ def parecer_rds3_new(request, slug):
     return render(request, 'parecer_new.html', context)
 
 
+def parecer_rds4_new(request, slug):
+    from django.http import HttpResponse
+    return HttpResponse()
+
+
 def create_parecer(request, slug, model, form_class):
     form = form_class(request.POST)
     context = {'form': form, 'slug': slug,
