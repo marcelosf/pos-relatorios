@@ -71,3 +71,8 @@ class Rds3ViewsInvalidPostTest(TestCase):
         """Form must be invalid"""
         form = self.resp.context['form']
         self.assertFalse(form.is_valid())
+
+    def test_message_error(self):
+        """It must show an error message"""
+        expected = 'Não foi possível enviar o parecer.'
+        self.assertContains(self.resp, expected)
