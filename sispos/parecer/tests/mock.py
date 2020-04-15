@@ -76,3 +76,7 @@ class MockParecer():
         rds3_default = {'resultados': 'resultados', 'artigo': 'artigo',
                         'atividades': 'atividades', 'status': 'aprovado'}
         return dict(rds3_default, **kwargs)
+
+    def make_rds4(self, **kwargs):
+        rds4_default = {'perspectiva': 'perspectivas', 'status': 'aprovado'}
+        return dict(rds4_default, **kwargs)

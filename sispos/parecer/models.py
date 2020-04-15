@@ -47,3 +47,12 @@ class Rds3(models.Model):
     status = models.CharField('status', max_length=20, choices=STATUS_CHOICES)
     uuid = models.UUIDField('uuid', default=uuid4, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Rds4(models.Model):
+    perspectiva = models.CharField('perspectivas', max_length=2048)
+    status = models.CharField('status', max_length=2048, choices=STATUS_CHOICES)
+    relator = models.ForeignKey(User, on_delete=models.CASCADE)
+    relatorio = models.ForeignKey(Relatorios, on_delete=models.CASCADE)
+    created_at = models.DateTimeField('created_at', auto_now_add=True)
+    uuid = models.UUIDField('uuid', default=uuid4, editable=False)
