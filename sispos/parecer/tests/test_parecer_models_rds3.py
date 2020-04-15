@@ -1,5 +1,6 @@
 from django.test import TestCase
 from sispos.parecer.models import Rds3
+from sispos.parecer.tests import mock
 
 
 class Rds3ModelTest(TestCase):
@@ -23,3 +24,15 @@ class Rds3ModelTest(TestCase):
     def test_has_status_attr(self):
         """Rds3 must haeve status attribute"""
         self.assertTrue(hasattr(Rds3, 'status'))
+
+    def test_persist_rds3(self):
+        """It must persist rds3 data"""
+        mock_user = mock.MockUser()
+        relator = mock_user.make_relator()
+        mock_relatorio = mock.MockRelatorio()
+        relatorio_data = mock_relatorio.make_relatorio()
+        relatorio = mock_relatorio.save_relatorio(relatorio_data)
+        mock_rds3 = mock.MockParecer()
+        rds3_data = mock_rds3.make_rds3(relator=relator, relatorio=relatorio)
+        Rds3.objects.create(**rds3_data)
+        self.assertTrue(Rds3.objects.exists())
