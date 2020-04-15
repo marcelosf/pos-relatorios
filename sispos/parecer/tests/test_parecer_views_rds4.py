@@ -58,7 +58,7 @@ class Rds4ViewPostTest(TestCase):
         self.assertContains(self.resp, expected)
 
 
-class Rds3ViewsInvalidPostTest(TestCase):
+class Rds4ViewsInvalidPostTest(TestCase):
     def setUp(self):
         mock_user = mock.MockUser()
         relator = mock_user.make_relator()
@@ -73,3 +73,8 @@ class Rds3ViewsInvalidPostTest(TestCase):
         """Form must be invalid"""
         form = self.resp.context['form']
         self.assertFalse(form.is_valid())
+
+    def test_message_error(self):
+        """It must show an error message"""
+        expected = 'Não foi possível enviar o parecer.'
+        self.assertContains(self.resp, expected)
