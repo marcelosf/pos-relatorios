@@ -22,6 +22,9 @@ def parecer_rds2_new(request, slug):
     return render(request, 'parecer_new.html', context)
 
 
+def parecer_rds3_new(request):
+    pass
+
 def create_parecer(request, slug, model, form_class):
     form = form_class(request.POST)
     context = {'form': form, 'slug': slug,
