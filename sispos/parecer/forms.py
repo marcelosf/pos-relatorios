@@ -40,3 +40,9 @@ class Rds3Form(forms.Form):
     atividades = forms.CharField(label='Outras atividades', max_length=2048,
                                  widget=forms.Textarea)
     status = forms.ChoiceField(label='Status', choices=STATUS_CHOICES)
+
+
+class Rds4Form(forms.Form):
+    perspectivas = forms.CharField(label='Perspectivas para conclusão da tese',
+                                   max_length=2048, widget=forms.Textarea)
+    status = forms.ChoiceField(label='Status', choices=STATUS_CHOICES)
