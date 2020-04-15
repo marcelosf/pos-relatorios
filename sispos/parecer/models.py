@@ -44,5 +44,6 @@ class Rds3(models.Model):
     atividades = models.CharField('atividades', max_length=2048)
     relator = models.ForeignKey(User, on_delete=models.CASCADE)
     relatorio = models.ForeignKey(Relatorios, on_delete=models.CASCADE)
+    status = models.CharField('status', max_length=20, choices=STATUS_CHOICES)
     uuid = models.UUIDField('uuid', default=uuid4, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
