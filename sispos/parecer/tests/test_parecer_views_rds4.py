@@ -46,3 +46,8 @@ class Rds4ViewPostTest(TestCase):
         """Context must have form"""
         context = self.resp.context
         self.assertIn('form', context)
+
+    def test_form_is_valid(self):
+        """form must be valid"""
+        form = self.resp.context['form']
+        self.assertTrue(form.is_valid())
