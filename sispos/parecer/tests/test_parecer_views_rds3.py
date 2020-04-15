@@ -54,3 +54,20 @@ class Rds3ViewsPostTest(TestCase):
         """It must show a success message"""
         expected = 'Parecer enviado com sucesso.'
         self.assertContains(self.resp, expected)
+
+
+class Rds3ViewsInvalidPostTest(TestCase):
+    def setUp(self):
+        mock_user = mock.MockUser()
+        relator = mock_user.make_relator()
+        self.client.force_login(relator)
+        mock_relatorio = mock.MockRelatorio()
+        relatorio_data = mock_relatorio.make_relatorio()
+        relatorio = mock_relatorio.save_relatorio(relatorio_data)
+        self.resp = self.client.post(r('parecer:parecer_rds3_new',
+                                       slug=str(relatorio.uuid)), {})
+
+    def test_form_invalid(self):
+        """Form must be invalid"""
+        form = self.resp.context['form']
+        self.assertFalse(form.is_valid())
