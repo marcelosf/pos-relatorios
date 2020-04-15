@@ -19,3 +19,7 @@ class Rds3ModelTest(TestCase):
         for expected in fks:
             with self.subTest():
                 self.assertTrue(hasattr(Rds3, expected))
+
+    def test_has_status_attr(self):
+        """Rds3 must haeve status attribute"""
+        self.assertTrue(hasattr(Rds3, 'status'))
