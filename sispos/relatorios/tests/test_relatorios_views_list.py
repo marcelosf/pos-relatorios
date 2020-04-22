@@ -107,6 +107,10 @@ class ViewsRelatoriosListTest(TestCase):
             with self.subTest():
                 self.assertContains(self.resp, expected)
 
+    def test_has_status_column(self):
+        """It must have a status column"""
+        self.assertContains(self.resp, 'Status')
+
 
 class ViewsRelatoriosListRelatorTest(TestCase):
     def setUp(self):

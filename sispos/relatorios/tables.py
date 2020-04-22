@@ -5,7 +5,7 @@ from sispos.relatorios.models import Relatorios
 
 
 class RelatoriosTable(tables.Table):
-    uuid = tables.Column(verbose_name='Ação')
+    uuid = tables.Column(verbose_name='Status')
 
     def render_uuid(self, value):
         url = r('relatorios:relatorios_update', slug=value)
