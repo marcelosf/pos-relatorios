@@ -113,6 +113,10 @@ class ViewsRelatoriosListRelatorTest(TestCase):
         mock_user = mock.MockUser()
         self.relator = mock_user.make_relator()
         self.client.force_login(self.relator)
+        mock_relaotrio = mock.MockRelatorio()
+        relatorio_data = mock_relaotrio.make_relatorio(semestre='rds2')
+        self.relatorio = mock_relaotrio.save_relatorio(relatorio_data)
+        self.resp = self.client.get(r('relatorios:relatorios_list'))
 
     def test_has_no_relatorio(self):
         """List should not have items"""

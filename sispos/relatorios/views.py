@@ -40,7 +40,7 @@ class RelatorioUpdate(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
     success_message = 'Relator atribuido com sucesso.'
 
     def test_func(self):
-        return self.request.user.has_perm('relatorios.change_relatorios')
+        return self.request.user.has_perm('relatorios.view_relatorios')
 
 
 relatorios_update = RelatorioUpdate.as_view()

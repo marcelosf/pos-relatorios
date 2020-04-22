@@ -9,7 +9,7 @@ class ParecerViewsGetTest(TestCase):
         mock_relatorio = mock.MockRelatorio()
         data = mock_relatorio.make_relatorio()
         self.relatorio = mock_relatorio.save_relatorio(data)
-        self.resp = self.client.get(r('parecer:parecer_new',
+        self.resp = self.client.get(r('parecer:parecer_rds1_new',
                                       slug=str(self.relatorio.uuid)))
 
     def test_status_code(self):
@@ -33,7 +33,7 @@ class ParecerViewsGetTest(TestCase):
         self.assertIn('slug', self.resp.context)
 
     def test_form_action(self):
-        expected = 'action="{}"'.format(r('parecer:parecer_new',
+        expected = 'action="{}"'.format(r('parecer:parecer_rds1_new',
                                         slug=str(self.relatorio.uuid)))
         self.assertContains(self.resp, expected)
 
@@ -68,7 +68,7 @@ class ParecerViewPostTest(TestCase):
         mock_parecer = mock.MockParecer()
         parecer_data = mock_parecer.make_parecer()
         self.client.force_login(relator)
-        self.resp = self.client.post(r('parecer:parecer_new',
+        self.resp = self.client.post(r('parecer:parecer_rds1_new',
                                        slug=str(relatorio.uuid)), parecer_data)
 
     def test_status_code(self):
@@ -97,7 +97,7 @@ class ParecerViewInvalidPostTest(TestCase):
         data = mock_relatorio.make_relatorio()
         relatorio = mock_relatorio.save_relatorio(data)
         self.client.force_login(relator)
-        self.resp = self.client.post(r('parecer:parecer_new',
+        self.resp = self.client.post(r('parecer:parecer_rds1_new',
                                        slug=str(relatorio.uuid)), {})
 
     def test_message(self):

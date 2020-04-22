@@ -11,7 +11,7 @@ class UpdateRelatorioTest(TestCase):
         coordenador = mock_user.make_coordenador()
         self.client.force_login(coordenador)
         mock_relatorio = mock.MockRelatorio()
-        self.relatorio_data = mock_relatorio.make_relatorio()
+        self.relatorio_data = mock_relatorio.make_relatorio(semestre='rds2')
         self.relatorio = mock_relatorio.save_relatorio(self.relatorio_data)
         self.resp = self.client.get(r('relatorios:relatorios_update',
                                     slug=str(self.relatorio.uuid)))
@@ -82,6 +82,12 @@ class UpdateRelatorioTest(TestCase):
         for expected in links:
             with self.subTest():
                 self.assertContains(self.resp, expected)
+
+    def test_has_parecer_link(self):
+        """It should have parecer link"""
+        expected = r('parecer:parecer_rds2_new',
+                     slug=str(self.relatorio.uuid))
+        self.assertContains(self.resp, expected)
 
 
 class UpdateRelatoriosLoggedOutTest(TestCase):

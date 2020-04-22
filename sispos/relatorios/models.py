@@ -4,7 +4,7 @@ from sispos.accounts.models import User
 from uuid import uuid4
 
 SEMESTER_1 = 'Primeiro semestre'
-SEMESTER_2 = 'Segundo semestre' 
+SEMESTER_2 = 'Segundo semestre'
 SEMESTER_3 = 'Terceriro semestre'
 SEMESTER_4 = 'Quarto semestre'
 SEMESTER_5 = 'Quinto semestre'
@@ -45,3 +45,7 @@ class Relatorios(models.Model):
 
     def get_absolute_url(self):
         return r('relatorios:relatorios_update', slug=str(self.uuid))
+
+    def get_parecer_url(self):
+        path_name = 'parecer:parecer_{}_new'.format(self.semestre)
+        return r(path_name, slug=str(self.uuid))

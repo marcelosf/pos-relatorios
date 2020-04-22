@@ -44,6 +44,7 @@
                         </ul>
                     </div>
                 </div>
+                {% if perms.relatorios.change_relatorios %}
                 <div class="card shadow mt-3">
                     <div class="card-header">
                         <h4>Encaminhar para o relator</h4>
@@ -56,6 +57,19 @@
                         </form>
                     </div>
                 </div>
+                {% endif %}
+
+                <div class="card shadow mt-3">
+                    <div class="card-header">
+                        <h4>Parecer</h4>
+                    </div>
+                    <div class="card-body">
+                        <a href="{{ relatorio.get_parecer_url }}" class="btn btn-outline-primary">
+                            Preencher parecer
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
 

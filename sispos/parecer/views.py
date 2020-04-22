@@ -6,11 +6,11 @@ from sispos.relatorios.models import Relatorios
 from sispos.parecer.models import Rds1, Rds2, Rds3, Rds4
 
 
-def parecer_new(request, slug):
+def parecer_rds1_new(request, slug):
     if request.method == 'POST':
         create_parecer(request, slug, Rds1, Rds1Form)
     context = {'form': Rds1Form(), 'slug': slug,
-               'action': r('parecer:parecer_new', slug=slug)}
+               'action': r('parecer:parecer_rds1_new', slug=slug)}
     return render(request, 'parecer_new.html', context)
 
 
