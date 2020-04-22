@@ -7,7 +7,7 @@ from django_tables2 import SingleTableMixin, LazyPaginator
 from django_filters.views import FilterView
 from django.views.generic import UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from sispos.relatorios.filters import RelatoriosFilter
 from sispos.relatorios.forms import RelatoriosForm
 from sispos.relatorios.tables import RelatoriosTable
@@ -31,16 +31,13 @@ class RelatoriosList(LoginRequiredMixin, SingleTableMixin, FilterView):
 relatorios_list = RelatoriosList.as_view()
 
 
-class RelatorioUpdate(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
+class RelatorioUpdate(SuccessMessageMixin, UpdateView):
     model = Relatorios
     fields = ['relator']
     template_name = 'relatorios_update.html'
     context_object_name = 'relatorio'
     slug_field = 'uuid'
     success_message = 'Relator atribuido com sucesso.'
-
-    def test_func(self):
-        return self.request.user.has_perm('relatorios.change_relatorios')
 
 
 relatorios_update = RelatorioUpdate.as_view()
