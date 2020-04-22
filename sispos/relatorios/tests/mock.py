@@ -19,7 +19,8 @@ class MockUser():
     def make_coordenador(self):
         user_data = self.make_user_data(login='334455')
         coordendor = self.save_user(user_data)
-        self.set_permission('change_relatorios', coordendor)
+        perms = ['view_relatorios', 'change_relatorios']
+        self.set_permission(perms, coordendor)
         return coordendor
 
     def make_orientador(self):
@@ -35,8 +36,8 @@ class MockUser():
         return relator
 
     def set_permission(self, perm_codename, user):
-        perms = Permission.objects.get(codename=perm_codename)
-        user.user_permissions.set([perms])
+        perms = Permission.objects.filter(codename__in=perm_codename)
+        user.user_permissions.set(perms)
 
     def set_group(self, group_name, user):
         group, created = Group.objects.get_or_create(**{'name': group_name})
