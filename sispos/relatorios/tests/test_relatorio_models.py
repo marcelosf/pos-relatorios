@@ -9,7 +9,7 @@ from django.shortcuts import resolve_url as r
 class RelatoriosTest(TestCase):
     def setUp(self):
         mock_relatorio = mock.MockRelatorio()
-        relatorio_data = mock_relatorio.make_relatorio()
+        relatorio_data = mock_relatorio.make_relatorio(semestre='rds2')
         self.obj = Relatorios.objects.create(**relatorio_data)
 
     def test_relatorio_instance(self):
@@ -60,3 +60,12 @@ class RelatoriosTest(TestCase):
     def test_has_semestre_attr(self):
         """It must have semestre attr"""
         self.assertTrue(hasattr(self.obj, 'semestre'))
+
+    def test_has_get_parecer_url(self):
+        """It must have get_parecer_url attr"""
+        self.assertTrue(hasattr(self.obj, 'get_parecer_url'))
+
+    def test_get_parecer_url(self):
+        """It must be a valid parecer url"""
+        expected = r('parecer:parecer_rds2_new', slug=str(self.obj.uuid))
+        self.assertEqual(expected, self.obj.get_parecer_url())
