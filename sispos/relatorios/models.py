@@ -22,6 +22,14 @@ SEMESTER_CHOICES = (
     ('rds7', SEMESTER_7),
 )
 
+WAITING = 'Aguardando parecer'
+DONE = 'Avaliado'
+
+STATUS_CHOICES = (
+    ('waiting', WAITING),
+    ('done', DONE)
+)
+
 
 def limit_to_relator():
     return {'groups__name': 'relatores'}
@@ -42,6 +50,8 @@ class Relatorios(models.Model):
     semestre = models.CharField('semestre', max_length=20,
                                 choices=SEMESTER_CHOICES)
     uuid = models.UUIDField('uuid', default=uuid4, editable=False)
+    state = models.CharField('state', max_length=20, default=WAITING,
+                             choices=STATUS_CHOICES)
 
     def get_absolute_url(self):
         return r('relatorios:relatorios_update', slug=str(self.uuid))

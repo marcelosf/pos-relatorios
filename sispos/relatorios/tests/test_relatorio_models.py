@@ -69,3 +69,7 @@ class RelatoriosTest(TestCase):
         """It must be a valid parecer url"""
         expected = r('parecer:parecer_rds2_new', slug=str(self.obj.uuid))
         self.assertEqual(expected, self.obj.get_parecer_url())
+
+    def test_has_state_attribute(self):
+        """Relatorios must have status attribute"""
+        self.assertTrue(hasattr(self.obj, 'state'))
