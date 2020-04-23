@@ -108,7 +108,7 @@ class ViewsRelatoriosListTest(TestCase):
 
     def test_button_parecer_text(self):
         """Text must be Avaliado or Avaliar"""
-        expected = 'class="btn btn-sm btn-block btn-outline-warning"'
+        expected = 'class="btn btn-sm btn-block btn-outline-success"'
         self.assertContains(self.resp, expected)
 
 
