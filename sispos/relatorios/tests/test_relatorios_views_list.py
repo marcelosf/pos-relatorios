@@ -57,11 +57,6 @@ class ViewsRelatoriosListTest(TestCase):
         for expected in collumns:
             self.assertContains(self.resp, expected)
 
-    def test_has_detalhar_button(self):
-        """Template should render detalhar button"""
-        expected = '<a class="btn btn-sm btn-outline-primary"'
-        self.assertContains(self.resp, expected)
-
     def test_has_filter(self):
         """Template should render filters"""
         filter = self.resp.context['filter']
@@ -110,6 +105,11 @@ class ViewsRelatoriosListTest(TestCase):
     def test_has_status_column(self):
         """It must have a status column"""
         self.assertContains(self.resp, 'Status')
+
+    def test_button_parecer_text(self):
+        """Text must be Avaliado or Avaliar"""
+        expected = 'class="btn btn-sm btn-block btn-outline-warning"'
+        self.assertContains(self.resp, expected)
 
 
 class ViewsRelatoriosListRelatorTest(TestCase):
