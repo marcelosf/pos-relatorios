@@ -123,3 +123,8 @@ class UpdateRelatorioPostTest(TestCase):
 
     def test_send_email(self):
         self.assertEqual(1, len(mail.outbox))
+
+    def test_state(self):
+        """State must be relator asigned"""
+        obj = Relatorios.objects.first()
+        self.assertEqual('relator_asigned', obj.state)
