@@ -19,8 +19,10 @@ def send_coordenador_email(sender, instance, **kwargs):
 
 @receiver(post_save, sender=Relatorios, dispatch_uid='send_orientador_email')
 def send_relator_email(sender, instance, **kwargs):
-    if instance.relator:
+    if instance.relator and (instance.state == 'waiting_relator'):
         email_group(RELATOR_GROUP_NAME, 'email_relator.txt')
+        instance.state = 'relator_asigned'
+        instance.save()
 
 
 def email_group(group_name, template_name, **kwargs):
