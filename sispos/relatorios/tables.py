@@ -7,22 +7,18 @@ from sispos.relatorios import models as states
 
 class RelatoriosTable(tables.Table):
     uuid = tables.Column(verbose_name='Status')
-    relator_state = tables.Column(verbose_name='Status', accessor='uuid')
 
     def render_uuid(self, value):
-        return self.make_action_button(states.RELATOR_ASSIGNED, value)
+        if self.user.has_perm('relatorios.change_relatorios'):
+            return self.make_action_button(states.RELATOR_ASSIGNED, value)
 
-    def render_relator_state(self, value):
-        return self.make_action_button(states.PARECER_RELATOR_SUBMITED, value)
+        if self.user.has_perm('relatorios.add_rds1'):
+            return self.make_action_button(states.PARECER_RELATOR_SUBMITED, value)
+
+        self.columns.hide('uuid')
 
     def before_render(self, request):
-        user_groups = request.user.groups.all()
-
-        if user_groups.filter(name='coordenadores').exists():
-            self.columns.hide('relator_state')
-
-        if user_groups.filter(name='relatores').exists():
-            self.columns.hide('uuid')
+        self.user = request.user
 
     def make_action_button(self, success, slug):
         obj = self.data.data.get(uuid=slug)
@@ -39,4 +35,4 @@ class RelatoriosTable(tables.Table):
         model = Relatorios
         template_name = 'django_tables2/bootstrap4.html'
         fields = ('nome', 'created', 'relator', 'orientador',
-                  'uuid', 'relator_state')
+                  'uuid',)
