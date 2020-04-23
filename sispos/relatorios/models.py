@@ -54,8 +54,8 @@ class Relatorios(models.Model):
     semestre = models.CharField('semestre', max_length=20,
                                 choices=SEMESTER_CHOICES)
     uuid = models.UUIDField('uuid', default=uuid4, editable=False)
-    state = models.CharField('state', max_length=128, default=WAITING_RELATOR,
-                             choices=STATUS_CHOICES)
+    state = models.CharField('state', max_length=128, 
+                             default='waiting_relator', choices=STATUS_CHOICES)
 
     def get_absolute_url(self):
         return r('relatorios:relatorios_update', slug=str(self.uuid))
