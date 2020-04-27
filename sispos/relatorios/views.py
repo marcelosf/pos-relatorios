@@ -22,10 +22,11 @@ class RelatoriosList(LoginRequiredMixin, SingleTableMixin, FilterView):
     filterset_class = RelatoriosFilter
 
     def get_table_data(self):
+        relatorios_list = super().get_table_data()
         user = self.request.user
         if user.has_perm('relatorios.change_relatorios'):
-            return Relatorios.objects.all()
-        return user.relator.all()
+            return self.object_list
+        return relatorios_list.filter(relator=user)
 
 
 relatorios_list = RelatoriosList.as_view()
