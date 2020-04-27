@@ -1,5 +1,4 @@
 import django_filters
-from sispos.relatorios.models import Relatorios
 from sispos.accounts.models import User
 
 
@@ -12,7 +11,3 @@ class RelatoriosFilter(django_filters.FilterSet):
         queryset=User.objects.filter(groups__name=ORIENTADOR_GROUP_NAME),
         label='Orientadores')
     created = django_filters.DateFilter(label='Envio')
-
-    class Meta:
-        model = Relatorios
-        fields = ['nome', 'orientador', 'created']
