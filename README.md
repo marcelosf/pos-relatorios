@@ -1,4 +1,5 @@
 # Pos - Relatorios
+<img src="sispos.png" width=500>
 
 [![Build Status](https://travis-ci.org/iagsti/pos-relatorios.svg?branch=master)](https://travis-ci.org/iagsti/pos-relatorios)
 
