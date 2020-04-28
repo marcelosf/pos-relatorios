@@ -15,6 +15,7 @@ from dj_database_url import parse as dburl
 from authlib.integrations.django_client import OAuth
 from decouple import config, Csv
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -171,5 +172,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+DEFAULT_PRIVATE_STORAGE_CLASS = 'private_storage.storage.files.PrivateFileSystemStorage'
+
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+PRIVATE_STORAGE_AUTH_FUNCTION = config('PRIVATE_STORAGE_AUTH_FUNCTION')
+PRIVATE_SOTRAGE_CLASS = config('PRIVATE_SOTRAGE_CLASS', default=DEFAULT_PRIVATE_STORAGE_CLASS)
+PRIVATE_STORAGE_ROOT = config('PRIVATE_STORAGE_ROOT')
