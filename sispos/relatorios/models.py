@@ -48,7 +48,7 @@ class Relatorios(models.Model):
                                 limit_choices_to=limit_to_relator)
     orientador = models.CharField('Orientador', max_length=128)
     programa = models.CharField('Programa', max_length=20)
-    relatorio = models.FileField('Relatório', upload_to='relatorios/%Y/%m/%d/')
+    relatorio = PrivateFileField('Relatório', upload_to='relatorios/%Y/%m/%d/')
     encaminhamento = PrivateFileField('Encaminhamento',
                                       upload_to='encaminhamentos/%Y/%m/%d/')
     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)

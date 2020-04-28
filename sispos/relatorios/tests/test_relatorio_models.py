@@ -79,3 +79,8 @@ class RelatoriosTest(TestCase):
         """It must be an instance of PrivateFileField"""
         field = Relatorios.encaminhamento.field
         self.assertIsInstance(field, PrivateFileField)
+
+    def test_relatorio_field_instance(self):
+        """It must be an instance of PrivateFileField"""
+        field = Relatorios.relatorio.field
+        self.assertIsInstance(field, PrivateFileField)
