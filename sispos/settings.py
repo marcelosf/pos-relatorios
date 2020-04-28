@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_tables2',
     'django_filters',
+    'private_storage',
     'widget_tweaks',
     'bootstrap4',
     'sispos.core',
