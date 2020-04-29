@@ -4,6 +4,7 @@ from django.db.models.fields.related import ForeignKey
 from sispos.relatorios.models import Relatorios
 from sispos.relatorios.tests import mock
 from django.shortcuts import resolve_url as r
+from private_files import PrivateFileField
 
 
 class RelatoriosTest(TestCase):
@@ -73,3 +74,13 @@ class RelatoriosTest(TestCase):
     def test_has_state_attribute(self):
         """Relatorios must have status attribute"""
         self.assertTrue(hasattr(self.obj, 'state'))
+
+    def test_encaminhamento_field_instance(self):
+        """It must be an instance of PrivateFileField"""
+        field = Relatorios.encaminhamento.field
+        self.assertIsInstance(field, PrivateFileField)
+
+    def test_relatorio_field_instance(self):
+        """It must be an instance of PrivateFileField"""
+        field = Relatorios.relatorio.field
+        self.assertIsInstance(field, PrivateFileField)

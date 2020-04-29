@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('sispos.core.urls')),
     path('relatorios/', include('sispos.relatorios.urls')),
     path('parecer/', include('sispos.parecer.urls')),
+    path('/private/media/', include('private_files.urls')),
 ]

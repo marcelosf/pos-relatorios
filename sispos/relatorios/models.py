@@ -2,6 +2,8 @@ from django.db import models
 from django.shortcuts import resolve_url as r
 from sispos.accounts.models import User
 from uuid import uuid4
+from private_files import PrivateFileField
+
 
 SEMESTER_1 = 'Primeiro semestre'
 SEMESTER_2 = 'Segundo semestre'
@@ -46,8 +48,8 @@ class Relatorios(models.Model):
                                 limit_choices_to=limit_to_relator)
     orientador = models.CharField('Orientador', max_length=128)
     programa = models.CharField('Programa', max_length=20)
-    relatorio = models.FileField('Relatório', upload_to='relatorios/%Y/%m/%d/')
-    encaminhamento = models.FileField('Encaminhamento',
+    relatorio = PrivateFileField('Relatório', upload_to='relatorios/%Y/%m/%d/')
+    encaminhamento = PrivateFileField('Encaminhamento',
                                       upload_to='encaminhamentos/%Y/%m/%d/')
     user = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)
     created = models.DateField('envio', auto_now_add=True)
