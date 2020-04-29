@@ -72,7 +72,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_tables2',
     'django_filters',
-    'private_storage',
+    'private_files',
     'widget_tweaks',
     'bootstrap4',
     'sispos.core',
@@ -171,11 +171,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-DEFAULT_PRIVATE_STORAGE_CLASS = 'private_storage.storage.files.PrivateFileSystemStorage'
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-PRIVATE_STORAGE_AUTH_FUNCTION = config('PRIVATE_STORAGE_AUTH_FUNCTION')
-PRIVATE_SOTRAGE_CLASS = config('PRIVATE_SOTRAGE_CLASS', default=DEFAULT_PRIVATE_STORAGE_CLASS)
-PRIVATE_STORAGE_ROOT = config('PRIVATE_STORAGE_ROOT')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
