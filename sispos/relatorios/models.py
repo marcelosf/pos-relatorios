@@ -2,7 +2,7 @@ from django.db import models
 from django.shortcuts import resolve_url as r
 from sispos.accounts.models import User
 from uuid import uuid4
-from private_storage.fields import PrivateFileField
+from private_files import PrivateFileField
 
 
 SEMESTER_1 = 'Primeiro semestre'
