@@ -4,7 +4,7 @@ from django.db.models.fields.related import ForeignKey
 from sispos.relatorios.models import Relatorios
 from sispos.relatorios.tests import mock
 from django.shortcuts import resolve_url as r
-from private_storage.fields import PrivateFileField
+from private_files import PrivateFileField
 
 
 class RelatoriosTest(TestCase):
